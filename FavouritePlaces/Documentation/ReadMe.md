@@ -9,6 +9,9 @@ Created ViewModel, which will handle any functions/extensions/classes etc., for 
 Grouped all created files under appropriate groups, as is best practice.
 In DataModel, added entity called Location, and attributes called name (String) and picture (URL).
 
-
-
+In Persistence, add struct to handle instance and call an error if container is unable to load.
+In FavouritePlacesApp, to be able to use DataModel throughout app, variable persistenceHandler has been passed through ContentView.
+Added @Environment to ContentView to access DataModel, including making attributes of Location variables.
+Created a new Core database, called Places, replacing DataModel. Replacing attributes of the Location variables into Place variables.
+Added addPlace and saveContext functions, which will be moved to ViewModel later.
 

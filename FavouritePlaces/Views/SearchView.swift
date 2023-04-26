@@ -6,10 +6,28 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SearchView: View {
+    var locationName: String
+    var viewContext: NSManagedObjectContext
+    @State var matches:[Place]?
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List {
+            ForEach(matches ?? []) { match in
+                Text(match.placeName ?? "No matches")
+            }
+        }.navigationTitle("Search Result")
+            .task {
+                let fetchRequest: NSFetchRequest<Place> = Place.fetchRequest()
+                fetchRequest.entity = Place.entity()
+                fetchRequest.predicate = NSPredicate (
+                    format: "placeName contains %@", locationName
+                )
+                matches = try? viewContext.fetch(fetchRequest)
+        }
     }
 }
+
 

@@ -21,5 +21,8 @@ To create a movePlace function, need to add a position attribute to Place entity
 Added navigationBaritems for editmode, so places can be moved and deleted. Added plus button into navigatiobaritems.
 Issue with movePlace function, will need to come back later.
 
-
+Removed Add button, as new plus button is in navbaritems.
+Want to create a Search feature, so that users can find places.
+Changed variable names for better understanding of what is happening in the code.
+Created a very basic search bar, which will be updated in later milestones.
 

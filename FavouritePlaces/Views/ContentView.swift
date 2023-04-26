@@ -12,32 +12,29 @@ struct ContentView: View {
     // to be able to receive context
     @Environment(\.managedObjectContext) private var viewContext
     // refer to entity attributes
-    @State var name: String = ""
+    @State var locationName: String = ""
     // to be able to get data
     @FetchRequest(entity: Place.entity(), sortDescriptors: [])
-    private var place: FetchedResults<Place>
+    private var places: FetchedResults<Place>
     
     var body: some View {
         NavigationView {
             VStack {
-                Text("Add new place")
-                TextField("Place name: ", text: $name)
+                TextField("Place name: ", text: $locationName)
                 
             HStack {
                 Spacer()
-                Button("Add"){
-                    addPlace()
-                    name = ""
-                }
-                Spacer()
                 Button("Clear") {
-                    name = ""
+                    locationName = ""
                 }
                 Spacer()
+                NavigationLink("Search") {
+                    SearchView(locationName: locationName, viewContext: viewContext)
+                }
             }
             List {
-                ForEach(place) {p in
-                    Text(p.placeName ?? "Unknown place")
+                ForEach(places) {place in
+                    Text(place.placeName ?? "Unknown place")
                     
                 }.onDelete(perform: delPlace)
                 .onMove(perform: movePlace)
@@ -46,7 +43,7 @@ struct ContentView: View {
         .navigationTitle("My Places")
         .navigationBarItems(leading: EditButton(), trailing: Button("+") {
             addPlace()
-            name = ""
+            locationName = ""
         })
         }
     }
@@ -54,8 +51,8 @@ struct ContentView: View {
     // func to add to viewmodel?
     private func addPlace() {
         withAnimation {
-            let place = Place(context: viewContext)
-            place.placeName = name
+            let places = Place(context: viewContext)
+            places.placeName = locationName
             saveContext()
         }
     }
@@ -63,8 +60,8 @@ struct ContentView: View {
     // func to add to viewmodel?
     private func delPlace(idx: IndexSet) {
         withAnimation {
-            idx.map{place[$0]}.forEach {
-                p in viewContext.delete(p)
+            idx.map{places[$0]}.forEach {
+                place in viewContext.delete(place)
             }
             saveContext()
         }
@@ -73,13 +70,13 @@ struct ContentView: View {
     // func to add to viewmodel? Need to fix, as not
     private func movePlace(from source: IndexSet, to destination: Int) {
         withAnimation {
-            var revisedPlace: [Place] = place.map {$0}
+            var revisedPlace: [Place] = places.map {$0}
             revisedPlace.move(fromOffsets: source, toOffset: destination)
             for reverseIndex in stride(from: revisedPlace.count - 1, through: 0, by: -1) {
-                let p = revisedPlace[reverseIndex]
-                p.placePosition = Int16(reverseIndex)
+                let place = revisedPlace[reverseIndex]
+                place.placePosition = Int16(reverseIndex)
             }
-            //place = revisedPlace // to update position
+            //places = revisedPlace // to update position
             saveContext()
         }
     }

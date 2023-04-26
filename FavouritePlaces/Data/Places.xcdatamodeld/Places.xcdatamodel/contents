@@ -4,9 +4,10 @@
     <entity name="Place" representedClassName="Place" syncable="YES" codeGenerationType="class">
         <attribute name="placeName" optional="YES" attributeType="String"/>
         <attribute name="placePicture" optional="YES" attributeType="URI"/>
+        <attribute name="placePosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Place" positionX="-54" positionY="-9" width="128" height="59"/>
         <element name="Entity" positionX="-36" positionY="18" width="128" height="29"/>
+        <element name="Place" positionX="-54" positionY="-9" width="128" height="74"/>
     </elements>
 </model>

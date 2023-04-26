@@ -14,4 +14,12 @@ In FavouritePlacesApp, to be able to use DataModel throughout app, variable pers
 Added @Environment to ContentView to access DataModel, including making attributes of Location variables.
 Created a new Core database, called Places, replacing DataModel. Replacing attributes of the Location variables into Place variables.
 Added addPlace and saveContext functions, which will be moved to ViewModel later.
+Now able to addPlace and saveContext, has persistency.
+
+Add the delPlace function, which deletes places, will be moved to ViewModel later.
+To create a movePlace function, need to add a position attribute to Place entity.
+Added navigationBaritems for editmode, so places can be moved and deleted. Added plus button into navigatiobaritems.
+Issue with movePlace function, will need to come back later.
+
+
 

@@ -26,3 +26,9 @@ Want to create a Search feature, so that users can find places.
 Changed variable names for better understanding of what is happening in the code.
 Created a very basic search bar, which will be updated in later milestones.
 
+Noticed that Persistence was not being tracked, identified by the question mark. Added it through Source Control.
+In Places, added entity called PlaceInformation, where attributes info/Detail/Image/Name/Latitude/Longitude were also added within that entity.
+Added relationship between the entities, where Place owns PlaceInformation and vice versa.
+DetailView will allow the user to change/add information about the place.
+Aesthetic changes to ContentView... such as removing Clear button and putting TextField and Search NavLink into same HStack.
+

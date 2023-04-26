@@ -20,18 +20,13 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             VStack {
-                TextField("Place name: ", text: $locationName)
-                
-            HStack {
-                Spacer()
-                Button("Clear") {
-                    locationName = ""
-                }
-                Spacer()
-                NavigationLink("Search") {
-                    SearchView(locationName: locationName, viewContext: viewContext)
-                }
-            }
+                HStack {
+                    TextField("Place name: ", text: $locationName)
+                    
+                    NavigationLink("Search") {
+                        SearchView(locationName: locationName, viewContext: viewContext)
+                        }
+                    }
             List {
                 ForEach(places) {place in
                     Text(place.placeName ?? "Unknown place")

@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G419" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Entity" representedClassName="Entity" syncable="YES" codeGenerationType="class"/>
     <entity name="Place" representedClassName="Place" syncable="YES" codeGenerationType="class">
         <attribute name="placeName" optional="YES" attributeType="String"/>
         <attribute name="placePicture" optional="YES" attributeType="URI"/>
         <attribute name="placePosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="contains" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlaceInformation" inverseName="belong" inverseEntity="PlaceInformation"/>
+    </entity>
+    <entity name="PlaceInformation" representedClassName="PlaceInformation" syncable="YES" codeGenerationType="class">
+        <attribute name="infoDetail" optional="YES" attributeType="String"/>
+        <attribute name="infoImage" optional="YES" attributeType="URI"/>
+        <attribute name="infoLatitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="infoLongitude" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="infoName" optional="YES" attributeType="String"/>
+        <relationship name="belong" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Place" inverseName="contains" inverseEntity="Place"/>
     </entity>
     <elements>
-        <element name="Entity" positionX="-36" positionY="18" width="128" height="29"/>
-        <element name="Place" positionX="-54" positionY="-9" width="128" height="74"/>
+        <element name="PlaceInformation" positionX="-36" positionY="18" width="128" height="119"/>
+        <element name="Place" positionX="-54" positionY="-9" width="128" height="89"/>
     </elements>
 </model>

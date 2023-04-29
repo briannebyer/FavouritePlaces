@@ -17,7 +17,7 @@ struct DetailView: View {
     @State var locationLong = ""
     @State var locationLat = ""
     @State var isEditing = false
-    //@State var image = defaultImage
+    @State var image = defaultImage
     //var viewContext: NSManagedObjectContext
     // @State var details: [PlaceInformation]?
     
@@ -49,11 +49,15 @@ struct DetailView: View {
                         place.strLong = locationLong
                         place.strLat = locationLat
                         saveData()
-                        
+                        Task {
+                        image = await place.getImage()
+                        }
                     }
                     isEditing.toggle()
                 }
             }
+            image.scaledToFit().cornerRadius(20).shadow(radius:20)
+            
         }.navigationTitle("Location Details")
             .onAppear {
                 locationName = place.strName
@@ -61,6 +65,8 @@ struct DetailView: View {
                 locationDetail = place.strDesc
                 locationLong = place.strLong
                 locationLat = place.strLat
-        }
+            }.task {
+                await image = place.getImage()
+            }
     }
 }

@@ -9,6 +9,9 @@ import Foundation
 import CoreData
 import SwiftUI
 
+// default image, if place does not have image
+let defaultImage = Image(systemName: "photo").resizable()
+var downloadImages: [URL: Image] = [:]
 
 extension Place {
     var strName: String {
@@ -64,6 +67,25 @@ extension Place {
             self.placePicture = url
         }
     }
+    var rowDisplay: String {
+        "Name: \(self.strName) (Detail: \(self.strDesc))"
+    }
+    
+    func getImage() async ->Image {
+        guard let url = self.placePicture else {return defaultImage}
+        if let image = downloadImages[url] {return image}
+        do{
+            let (data, _) = try await URLSession.shared.data(from: url)
+            guard let uiimg = UIImage(data: data) else {return defaultImage}
+            let image = Image(uiImage: uiimg).resizable()
+            downloadImages[url]=image
+            return image
+        }catch {
+            print("Error in download image: \(error)")
+        }
+        
+        return defaultImage
+    }
 }
 
 
@@ -75,12 +97,3 @@ func saveData() {
         print("Error to save with \(error)")
     }
 }
-
-//func saveContext() {
-//    do {
-//        try viewContext.save()
-//    } catch {
-//        let error = error as NSError
-//        fatalError("An error occured during save: \(error)")
-//    }
-//}

@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct RowView: View {
+    var place: Place
+    @State var image = defaultImage
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            image.frame(width:40, height: 40).clipShape(Rectangle())
+            Text(place.rowDisplay)
+        }
+        .task {
+            image = await place.getImage()
+        }
     }
 }

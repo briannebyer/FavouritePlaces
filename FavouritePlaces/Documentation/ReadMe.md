@@ -48,3 +48,8 @@ Added NavLink in ContentView, so that when the user taps a place, they are direc
 Tried to use saveContext() for DetailView, however, it is out of scope and a prvate func in ContentView. Created saveData func in ViewModel to be used throughout app.
 Works within DetailView, so removed saveContext and replaced with saveData in ContentView. This works correctly and anything changed is saved when the app is refreshed also.
 
+Next step is to be able to load images for each place. In ViewModel, added func to get the places images. Returns a default image if there is no alloacted image for place. Able to add image to place, and display, however, not formatted correctly.
+For RowView, created var in ViewModel that includes the name and description of place. This is shown with the image of place, referred to in ContentView. Need to format correctly.
+
+
+

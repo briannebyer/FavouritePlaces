@@ -28,7 +28,7 @@ struct ContentView: View {
                         }
                 }
             List {
-                ForEach(places) {place in
+                ForEach(places) { place in
                     NavigationLink(destination: DetailView(place: place)) {
                         RowView(place: place)
                     }
@@ -43,11 +43,7 @@ struct ContentView: View {
         })
         }
     }
-//        .onAppear{
-//            name = animal.strName
-//            age = animal.strAge
-//            url = animal.strUrl
-//        }
+
     // func to add to viewmodel?
     private func addPlace() {
         withAnimation {

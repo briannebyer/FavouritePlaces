@@ -66,9 +66,11 @@ struct DetailView: View {
                         .foregroundColor(.gray)
                 }
             }
-            HStack {
-                Button("\(isEditing ? "Confirm" : "Edit")") {
-                    if(isEditing) {
+            
+        }.navigationTitle("Location Details")
+            .navigationBarItems(trailing:
+                Button(action: {
+                    if isEditing {
                         place.strName = locationName
                         place.strURL = locationURL
                         place.strDesc = locationDetail
@@ -76,15 +78,15 @@ struct DetailView: View {
                         place.strLat = locationLat
                         saveData()
                         Task {
-                        image = await place.getImage()
+                            image = await place.getImage()
                         }
                     }
                     isEditing.toggle()
-                }
-            }
-            //image.scaledToFit().cornerRadius(20).shadow(radius:20)
-            
-        }.navigationTitle("Location Details")
+                }, label: {
+                    Text(isEditing ? "Done" : "Edit")
+                })
+            )
+        
             .onAppear {
                 locationName = place.strName
                 locationURL = place.strURL

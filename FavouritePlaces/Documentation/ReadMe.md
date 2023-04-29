@@ -57,3 +57,7 @@ In DetailView, made each variable have their own HStack, changing textfield text
 In RowView, made image format similar to image format in DetailView (rounded).
 In DetailView, when user is editing, user will be prompted by "Enter...", with the text being changed to gray. 
 
+Adding edit button to navigation bar in DetailView, to keep consistency with app.
+
+30/04/23
+

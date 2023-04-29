@@ -31,6 +31,28 @@ struct DetailView: View {
                     Text("Longitude: \(locationLong)")
                     Text("Latitude: \(locationLat)")
                 }
+            } else {
+                List {
+                    TextField("Place name: ", text: $locationName)
+                    TextField("Place image: ", text: $locationURL)
+                    TextField("Place details: ", text: $locationDetail)
+                    TextField("Longitude: ", text: $locationLong)
+                    TextField("Latitude: ", text: $locationLat)
+                }
+            }
+            HStack {
+                Button("\(isEditing ? "Confirm" : "Edit")") {
+                    if(isEditing) {
+                        place.strName = locationName
+                        place.strURL = locationURL
+                        place.strDesc = locationDetail
+                        place.strLong = locationLong
+                        place.strLat = locationLat
+                        // saveContext(), out of scope
+                        
+                    }
+                    isEditing.toggle()
+                }
             }
         }.navigationTitle("Location Details")
             .onAppear {
@@ -42,22 +64,3 @@ struct DetailView: View {
         }
     }
 }
-
-//            } else {
-//                    List{
-//                        TextField("Place name:", text: $pName)
-//                        //TextField("Place image:", text: $pURL)
-//                        TextField("Place details:", text: $pDetail)
-//                        TextField("Longitude:", text: Binding<String>(
-//                                get: { String(pLong) },
-//                                set: { if let value = Double($0) { pLong = value } }
-//                            ))
-//                        TextField("Latitude:", text: Binding<String>(
-//                            get: { String(pLat) },
-//                            set: { if let value = Double($0) { pLat = value } }
-//                    ))
-//                }
-//            }
-//        }
-//    }
-//}

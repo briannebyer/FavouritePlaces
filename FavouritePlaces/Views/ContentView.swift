@@ -83,7 +83,7 @@ struct ContentView: View {
     }
     
     // func to add to viewmodel?
-    private func saveContext() {
+    func saveContext() {
         do {
             try viewContext.save()
         } catch {

@@ -9,6 +9,15 @@ import Foundation
 import CoreData
 import SwiftUI
 
+//func saveContext() {
+//    do {
+//        try viewContext.save()
+//    } catch {
+//        let error = error as NSError
+//        fatalError("An error occured during save: \(error)")
+//    }
+//}
+
 extension Place {
     var strName: String {
         get {

@@ -68,7 +68,7 @@ extension Place {
         }
     }
     var rowDisplay: String {
-        "Name: \(self.strName) (Detail: \(self.strDesc))"
+        "\(self.strName): \(self.strDesc)"
     }
     
     func getImage() async ->Image {

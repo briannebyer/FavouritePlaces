@@ -48,8 +48,12 @@ Added NavLink in ContentView, so that when the user taps a place, they are direc
 Tried to use saveContext() for DetailView, however, it is out of scope and a prvate func in ContentView. Created saveData func in ViewModel to be used throughout app.
 Works within DetailView, so removed saveContext and replaced with saveData in ContentView. This works correctly and anything changed is saved when the app is refreshed also.
 
-Next step is to be able to load images for each place. In ViewModel, added func to get the places images. Returns a default image if there is no alloacted image for place. Able to add image to place, and display, however, not formatted correctly.
+Next step is to be able to load images for each place. In ViewModel, added func to get the places images. Returns a default image if there is no allocated image for place. Able to add image to place, and display, however, not formatted correctly.
 For RowView, created var in ViewModel that includes the name and description of place. This is shown with the image of place, referred to in ContentView. Need to format correctly.
 
-
+Noticed that I was unable to add another place in ContenttView, changed func addPlace to fix issue. Removed guard func, as the textfield will only be used for Search. When user adds new place, name has default of New Location and a call to action to navigate to DetailView. However, when locationName is changed in DetailView, unable to see change in ContentView. Will come back to issue later.
+In ViewModel, change var shown in ContentView. In RowView, Changed lineLimit to 2, to fit longer locationNames and locationDetails.
+In DetailView, made each variable have their own HStack, changing textfield text to a gray colour and pushing text input by user to the right. LocationDetail is the exception, using the caption font. 
+In RowView, made image format similar to image format in DetailView (rounded).
+In DetailView, when user is editing, user will be prompted by "Enter...", with the text being changed to gray. 
 

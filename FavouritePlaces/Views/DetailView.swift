@@ -25,19 +25,45 @@ struct DetailView: View {
         VStack {
             if !isEditing {
                 List {
-                    Text("Place name: \(locationName)")
-                    Text("Place image: \(locationURL)")
-                    Text("Place details: \(locationDetail)")
-                    Text("Longitude: \(locationLong)")
-                    Text("Latitude: \(locationLat)")
+                    VStack (alignment: .leading) {
+                        HStack {
+                            Text("Place name: ")
+                                .foregroundColor(.gray)
+                            Spacer()
+                            Text("\(locationName)")
+                        }
+                        image.scaledToFit().cornerRadius(20).shadow(radius:10)
+                        HStack {
+                            Text("\(locationDetail)")
+                                .font(.caption)
+                        }
+                        Spacer()
+                        HStack {
+                            Text("Longitude: ")
+                                .foregroundColor(.gray)
+                            Spacer()
+                            Text("\(locationLong)")
+                        }
+                        HStack {
+                            Text("Latitude: ")
+                                .foregroundColor(.gray)
+                            Spacer()
+                            Text("\(locationLat)")
+                        }
+                    }
                 }
             } else {
                 List {
-                    TextField("Place name: ", text: $locationName)
-                    TextField("Place image: ", text: $locationURL)
-                    TextField("Place details: ", text: $locationDetail)
-                    TextField("Longitude: ", text: $locationLong)
-                    TextField("Latitude: ", text: $locationLat)
+                    TextField("Enter place name: ", text: $locationName)
+                        .foregroundColor(.gray)
+                    TextField("Enter image URL: ", text: $locationURL)
+                        .foregroundColor(.gray)
+                    TextField("Enter additional details: ", text: $locationDetail)
+                        .foregroundColor(.gray)
+                    TextField("Enter longitude: ", text: $locationLong)
+                        .foregroundColor(.gray)
+                    TextField("Enter latitude: ", text: $locationLat)
+                        .foregroundColor(.gray)
                 }
             }
             HStack {
@@ -56,7 +82,7 @@ struct DetailView: View {
                     isEditing.toggle()
                 }
             }
-            image.scaledToFit().cornerRadius(20).shadow(radius:20)
+            //image.scaledToFit().cornerRadius(20).shadow(radius:20)
             
         }.navigationTitle("Location Details")
             .onAppear {

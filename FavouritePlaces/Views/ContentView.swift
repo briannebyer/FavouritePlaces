@@ -31,7 +31,6 @@ struct ContentView: View {
                 ForEach(places) {place in
                     NavigationLink(destination: DetailView(place: place)) {
                         RowView(place: place)
-                        //Text(place.placeName ?? "Unknown place")
                     }
                     
                 }.onDelete(perform: delPlace)
@@ -41,25 +40,24 @@ struct ContentView: View {
         .navigationTitle("My Places")
         .navigationBarItems(leading: EditButton(), trailing: Button("+") {
             addPlace()
-            locationName = ""
         })
         }
     }
-    
+//        .onAppear{
+//            name = animal.strName
+//            age = animal.strAge
+//            url = animal.strUrl
+//        }
     // func to add to viewmodel?
     private func addPlace() {
-        // if locationName empty, do nothing
-        guard !locationName.isEmpty else {
-            return
-        }
         withAnimation {
             let places = Place(context: viewContext)
-            places.placeName = locationName
-            saveData()
+            places.placeName = "New Location Name"
+            places.placeDetail = "Add Details"
+            //saveData()
         }
     }
-    
-    // func to add to viewmodel?
+
     private func delPlace(idx: IndexSet) {
         withAnimation {
             idx.map{places[$0]}.forEach {
@@ -68,8 +66,7 @@ struct ContentView: View {
             saveData()
         }
     }
-    
-    // func to add to viewmodel? Need to fix, as not
+
     private func movePlace(from source: IndexSet, to destination: Int) {
         withAnimation {
             var revisedPlace: [Place] = places.map {$0}
@@ -83,7 +80,6 @@ struct ContentView: View {
         }
     }
     
-    // func to add to viewmodel?
     func saveContext() {
         do {
             try viewContext.save()

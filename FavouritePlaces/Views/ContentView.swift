@@ -26,10 +26,12 @@ struct ContentView: View {
                     NavigationLink("Search") {
                         SearchView(locationName: locationName, viewContext: viewContext)
                         }
-                    }
+                }
             List {
                 ForEach(places) {place in
-                    Text(place.placeName ?? "Unknown place")
+                    NavigationLink(destination: DetailView(place: place)) {
+                        Text(place.placeName ?? "Unknown place")
+                    }
                     
                 }.onDelete(perform: delPlace)
                 .onMove(perform: movePlace)
@@ -45,6 +47,10 @@ struct ContentView: View {
     
     // func to add to viewmodel?
     private func addPlace() {
+        // if locationName empty, do nothing
+        guard !locationName.isEmpty else {
+            return
+        }
         withAnimation {
             let places = Place(context: viewContext)
             places.placeName = locationName

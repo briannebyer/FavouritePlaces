@@ -9,14 +9,6 @@ import Foundation
 import CoreData
 import SwiftUI
 
-//func saveContext() {
-//    do {
-//        try viewContext.save()
-//    } catch {
-//        let error = error as NSError
-//        fatalError("An error occured during save: \(error)")
-//    }
-//}
 
 extension Place {
     var strName: String {
@@ -73,3 +65,22 @@ extension Place {
         }
     }
 }
+
+
+func saveData() {
+    let ctx = PersistenceController.shared.container.viewContext
+    do {
+        try ctx.save()
+    }catch {
+        print("Error to save with \(error)")
+    }
+}
+
+//func saveContext() {
+//    do {
+//        try viewContext.save()
+//    } catch {
+//        let error = error as NSError
+//        fatalError("An error occured during save: \(error)")
+//    }
+//}

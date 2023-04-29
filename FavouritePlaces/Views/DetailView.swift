@@ -48,7 +48,7 @@ struct DetailView: View {
                         place.strDesc = locationDetail
                         place.strLong = locationLong
                         place.strLat = locationLat
-                        // saveContext(), out of scope
+                        saveData()
                         
                     }
                     isEditing.toggle()

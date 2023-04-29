@@ -54,7 +54,7 @@ struct ContentView: View {
         withAnimation {
             let places = Place(context: viewContext)
             places.placeName = locationName
-            saveContext()
+            saveData()
         }
     }
     
@@ -64,7 +64,7 @@ struct ContentView: View {
             idx.map{places[$0]}.forEach {
                 place in viewContext.delete(place)
             }
-            saveContext()
+            saveData()
         }
     }
     
@@ -78,7 +78,7 @@ struct ContentView: View {
                 place.placePosition = Int16(reverseIndex)
             }
             //places = revisedPlace // to update position
-            saveContext()
+            saveData()
         }
     }
     

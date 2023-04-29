@@ -45,3 +45,6 @@ In ViewModel, added an extension to entity Place. Added important variables, for
 In DetailView, added back some of the uncommented ("Old Code") before adding extension into ViewModel. Modified according to ViewModel.
 Added NavLink in ContentView, so that when the user taps a place, they are directed to the place's individual details.
 
+Tried to use saveContext() for DetailView, however, it is out of scope and a prvate func in ContentView. Created saveData func in ViewModel to be used throughout app.
+Works within DetailView, so removed saveContext and replaced with saveData in ContentView. This works correctly and anything changed is saved when the app is refreshed also.
+

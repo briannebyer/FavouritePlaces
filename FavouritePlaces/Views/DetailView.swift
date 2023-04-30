@@ -18,6 +18,8 @@ struct DetailView: View {
     @State var locationLat = ""
     @State var isEditing = false
     @State var image = defaultImage
+    // to change default back button
+    @Environment(\.presentationMode) var presentationMode
     //var viewContext: NSManagedObjectContext
     // @State var details: [PlaceInformation]?
     
@@ -66,9 +68,18 @@ struct DetailView: View {
                         .foregroundColor(.gray)
                 }
             }
-            
-        }.navigationTitle("Location Details")
-            .navigationBarItems(trailing:
+
+        }.navigationTitle(isEditing ? "Location Details": locationName )
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: Button(action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+                HStack {
+                    Image(systemName: "arrow.left")
+                        .foregroundColor(.blue)
+                    Text("My Places")
+                }
+            }, trailing:
                 Button(action: {
                     if isEditing {
                         place.strName = locationName

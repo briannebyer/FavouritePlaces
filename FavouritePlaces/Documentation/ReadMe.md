@@ -60,4 +60,6 @@ In DetailView, when user is editing, user will be prompted by "Enter...", with t
 Adding edit button to navigation bar in DetailView, to keep consistency with app.
 
 30/04/23
-
+As per M1 requirements, need to ensure the title of DetailView is editable (which should be the name of place) and that back button is the title of ContentView.
+Added in Navtitle, that if there is no locationName, the default is Location Details, but if there is, it is the locationName of place. This is also persistent. However, still an issue with viewing the new changes in ContentView.
+To change the default back buttton in DetailView, used presentationMode and ensured the default back button was hidden. Created custom back button in NavBarItems. 

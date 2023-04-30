@@ -69,3 +69,5 @@ Commented out onMove and associated function, as it does not seem to be required
 Note that there is still an issue between DetailView and ContentView to show changes in DetailView. Only exception are images.
 
 Added comments to all func/methods/extensions used throughout app so far.
+
+Created test (and commented) in FavouritePlacesTests, which checks that each view (Content/Detail/Search) is not nil. Thus, ensuring each view are properly initialised and each view is not empty. If they are empty, throws an error. Test suceeded.

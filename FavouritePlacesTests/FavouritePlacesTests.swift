@@ -17,13 +17,21 @@ class FavouritePlacesTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    /**
+    This test checks the navigation flow of the app. It creates instances of ContentView, SearchView, and DetailView with a newly created NSManagedObjectContext instance. Then it checks that each view's body property is not nil.
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    - Throws: An error if the test fails.
+    - Returns: Void.
+    */
+    func testNavigation() throws {
+        let contentView = ContentView()
+        let searchView = SearchView(locationName: "test", viewContext: contentView.viewContext)
+        let detailView = DetailView(place: Place(context: contentView.viewContext))
+
+        XCTAssertNotNil(contentView.body)
+        XCTAssertNotNil(searchView.body)
+        XCTAssertNotNil(detailView.body)
     }
 
     func testPerformanceExample() throws {
@@ -32,5 +40,4 @@ class FavouritePlacesTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-
 }

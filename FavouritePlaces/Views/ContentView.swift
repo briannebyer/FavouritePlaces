@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var locationName: String = ""
     // to be able to get data
     @FetchRequest(entity: Place.entity(), sortDescriptors: [NSSortDescriptor(key: "placeName", ascending: true)])
-    private var places: FetchedResults<Place>
+    var places: FetchedResults<Place>
     
     var body: some View {
         NavigationView {
@@ -46,14 +46,14 @@ struct ContentView: View {
     }
 
     /**
-    This private function adds a new place to the managed object context of the viewContext using the specified name and details.
+    This function adds a new place to the managed object context of the viewContext using the specified name and details.
 
     - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
     - Parameter viewContext: The managed object context to which the new place will be added.
     - Parameter placeName: The name of the new place to be added.
     - Parameter placeDetail: The details of the new place to be added.
     */
-    private func addPlace() {
+    func addPlace() {
         withAnimation {
             let places = Place(context: viewContext)
             places.placeName = "New Location Name"
@@ -62,13 +62,13 @@ struct ContentView: View {
     }
     
     /**
-    This private function deletes a place from the managed object context of the viewContext, based on the specified IndexSet of place objects.
+    This unction deletes a place from the managed object context of the viewContext, based on the specified IndexSet of place objects.
 
     - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
     - Parameter viewContext: The managed object context from which the place will be deleted.
     - Parameter idx: An IndexSet object containing the indices of the place objects to be deleted.
     */
-    private func delPlace(idx: IndexSet) {
+    func delPlace(idx: IndexSet) {
         withAnimation {
             idx.map{places[$0]}.forEach {
                 place in viewContext.delete(place)

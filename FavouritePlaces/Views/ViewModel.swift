@@ -13,6 +13,18 @@ import SwiftUI
 let defaultImage = Image(systemName: "photo").resizable()
 var downloadImages: [URL: Image] = [:]
 
+/**
+This extension adds computed properties and a function to the Place struct. The properties allow for getting and setting the name, description, longitude, latitude, and URL of a place in both string and non-string formats. The rowDisplay property returns a string combining the place name and description. The getImage() function asynchronously downloads and returns an image associated with the place URL, or a default image if the URL is nil or invalid.
+
+- Parameter strName: a computed property that returns the name of the place as a string or "unknown" if it is nil.
+- Parameter strDesc: a computed property that returns the description of the place as a string or "unknown" if it is nil.
+- Parameter strLong: a computed property that returns the longitude of the place as a string or "unknown" if it is nil. It can also be set with a string value and automatically converts it to a Double data type.
+- Parameter strLat: a computed property that returns the latitude of the place as a string or "unknown" if it is nil. It can also be set with a string value and automatically converts it to a Double data type.
+- Parameter strURL: a computed property that returns the URL of the place's picture as a string or an empty string if it is nil. It can also be set with a string value and automatically converts it to a URL data type.
+- Parameter rowDisplay: a computed property that returns the name and description of the place in the format "name: description".
+- Requires: The place struct must have a placeName and placeDetail property, and the placeLongitude and placeLatitude properties must be convertible to Double.
+- Returns: An Image object downloaded asynchronously from the place URL or a default image if the URL is nil or invalid.
+*/
 extension Place {
     var strName: String {
         get {
@@ -88,7 +100,12 @@ extension Place {
     }
 }
 
+/**
+The function saves changes made to the managed object context of the PersistenceController shared instance.
 
+- Important: The changes will not be persisted to the persistent store until the context is saved.
+- Throws: An error if there is an issue saving the changes.
+*/
 func saveData() {
     let ctx = PersistenceController.shared.container.viewContext
     do {

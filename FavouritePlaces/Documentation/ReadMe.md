@@ -67,3 +67,5 @@ To change the default back buttton in DetailView, used presentationMode and ensu
 Added sort, where list of places are sorted alphabetically according to placeName.
 Commented out onMove and associated function, as it does not seem to be required for this Milestone. 
 Note that there is still an issue between DetailView and ContentView to show changes in DetailView. Only exception are images.
+
+Added comments to all func/methods/extensions used throughout app so far.

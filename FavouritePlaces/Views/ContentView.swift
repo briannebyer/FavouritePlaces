@@ -45,16 +45,29 @@ struct ContentView: View {
         }
     }
 
-    // func to add to viewmodel?
+    /**
+    This private function adds a new place to the managed object context of the viewContext using the specified name and details.
+
+    - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
+    - Parameter viewContext: The managed object context to which the new place will be added.
+    - Parameter placeName: The name of the new place to be added.
+    - Parameter placeDetail: The details of the new place to be added.
+    */
     private func addPlace() {
         withAnimation {
             let places = Place(context: viewContext)
             places.placeName = "New Location Name"
             places.placeDetail = "Add Details"
-            //saveData()
         }
     }
+    
+    /**
+    This private function deletes a place from the managed object context of the viewContext, based on the specified IndexSet of place objects.
 
+    - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
+    - Parameter viewContext: The managed object context from which the place will be deleted.
+    - Parameter idx: An IndexSet object containing the indices of the place objects to be deleted.
+    */
     private func delPlace(idx: IndexSet) {
         withAnimation {
             idx.map{places[$0]}.forEach {
@@ -77,6 +90,12 @@ struct ContentView: View {
 //        }
 //    }
     
+    /**
+    This function saves any changes made to the viewContext.
+
+    - Throws: A fatal error if there is an error while saving the context.
+    - Important: This function should be called after any changes are made to the managed object context.
+    */
     func saveContext() {
         do {
             try viewContext.save()

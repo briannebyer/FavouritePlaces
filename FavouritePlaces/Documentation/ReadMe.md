@@ -63,3 +63,7 @@ Adding edit button to navigation bar in DetailView, to keep consistency with app
 As per M1 requirements, need to ensure the title of DetailView is editable (which should be the name of place) and that back button is the title of ContentView.
 Added in Navtitle, that if there is no locationName, the default is Location Details, but if there is, it is the locationName of place. This is also persistent. However, still an issue with viewing the new changes in ContentView.
 To change the default back buttton in DetailView, used presentationMode and ensured the default back button was hidden. Created custom back button in NavBarItems. 
+
+Added sort, where list of places are sorted alphabetically according to placeName.
+Commented out onMove and associated function, as it does not seem to be required for this Milestone. 
+Note that there is still an issue between DetailView and ContentView to show changes in DetailView. Only exception are images.

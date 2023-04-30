@@ -10,11 +10,11 @@ import CoreData
 
 struct ContentView: View {
     // to be able to receive context
-    @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) var viewContext
     // refer to entity attributes
     @State var locationName: String = ""
     // to be able to get data
-    @FetchRequest(entity: Place.entity(), sortDescriptors: [])
+    @FetchRequest(entity: Place.entity(), sortDescriptors: [NSSortDescriptor(key: "placeName", ascending: true)])
     private var places: FetchedResults<Place>
     
     var body: some View {
@@ -29,12 +29,13 @@ struct ContentView: View {
                 }
             List {
                 ForEach(places) { place in
-                    NavigationLink(destination: DetailView(place: place)) {
+                    NavigationLink(destination: DetailView(place: place //viewContext: NSManagedObjectContext
+                                                          )) {
                         RowView(place: place)
                     }
                     
                 }.onDelete(perform: delPlace)
-                .onMove(perform: movePlace)
+                //.onMove(perform: movePlace)
             }
         }.padding()
         .navigationTitle("My Places")
@@ -63,18 +64,18 @@ struct ContentView: View {
         }
     }
 
-    private func movePlace(from source: IndexSet, to destination: Int) {
-        withAnimation {
-            var revisedPlace: [Place] = places.map {$0}
-            revisedPlace.move(fromOffsets: source, toOffset: destination)
-            for reverseIndex in stride(from: revisedPlace.count - 1, through: 0, by: -1) {
-                let place = revisedPlace[reverseIndex]
-                place.placePosition = Int16(reverseIndex)
-            }
-            //places = revisedPlace // to update position
-            saveData()
-        }
-    }
+//    private func movePlace(from source: IndexSet, to destination: Int) {
+//        withAnimation {
+//            var revisedPlace: [Place] = places.map {$0}
+//            revisedPlace.move(fromOffsets: source, toOffset: destination)
+//            for reverseIndex in stride(from: revisedPlace.count - 1, through: 0, by: -1) {
+//                let place = revisedPlace[reverseIndex]
+//                place.placePosition = Int16(reverseIndex)
+//            }
+//            //places = revisedPlace // to update position
+//            saveData()
+//        }
+//    }
     
     func saveContext() {
         do {

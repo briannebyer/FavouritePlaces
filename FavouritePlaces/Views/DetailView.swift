@@ -21,7 +21,6 @@ struct DetailView: View {
     // to change default back button
     @Environment(\.presentationMode) var presentationMode
     //var viewContext: NSManagedObjectContext
-    // @State var details: [PlaceInformation]?
     
     var body: some View {
         VStack {
@@ -104,6 +103,7 @@ struct DetailView: View {
                 locationDetail = place.strDesc
                 locationLong = place.strLong
                 locationLat = place.strLat
+                
             }.task {
                 await image = place.getImage()
             }

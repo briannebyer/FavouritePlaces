@@ -75,3 +75,4 @@ Created test (and commented) in FavouritePlacesTests, which checks that each vie
 ## Second Milestone
 ### 10/05/23
 Need to load default places, as currently the places only save on my device, but will not appear for others. Added the loadDefaultPlace function with 3 places that are automatically displayed for user.
+In ContentView,

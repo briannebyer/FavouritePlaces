@@ -38,6 +38,12 @@ struct ContentView: View {
                 //.onMove(perform: movePlace)
             }
         }.padding()
+            // if there are 0 places, load the default places
+        .task {
+                if(places.count == 0) {
+                    loadDefaultPlaces()
+                }
+            }
         .navigationTitle("My Places")
         .navigationBarItems(leading: EditButton(), trailing: Button("+") {
             addPlace()

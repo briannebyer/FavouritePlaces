@@ -20,7 +20,7 @@ struct DetailView: View {
     @State var image = defaultImage
     // to change default back button
     @Environment(\.presentationMode) var presentationMode
-    //var viewContext: NSManagedObjectContext
+    // var viewContext: NSManagedObjectContext
     
     var body: some View {
         VStack {

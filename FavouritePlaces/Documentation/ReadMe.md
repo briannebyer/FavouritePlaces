@@ -71,3 +71,7 @@ Note that there is still an issue between DetailView and ContentView to show cha
 Added comments to all func/methods/extensions used throughout app so far.
 
 Created test (and commented) in FavouritePlacesTests, which checks that each view (Content/Detail/Search) is not nil. Thus, ensuring each view are properly initialised and each view is not empty. If they are empty, throws an error. Test suceeded.
+
+## Second Milestone
+### 10/05/23
+Need to load default places, as currently the places only save on my device, but will not appear for others. Added the loadDefaultPlace function with 3 places that are automatically displayed for user.

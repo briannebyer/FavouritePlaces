@@ -44,19 +44,6 @@ extension Place {
         }
     }
     
-    // to allow longitude to be a string for input and any changes, then converting back to float data type
-    var strLong: String {
-        get {
-            "\(self.placeLongitude)"
-        }
-        set {
-            guard let placeLongitude = Double(newValue) else {
-                return
-            }
-            self.placeLongitude = placeLongitude
-        }
-    }
-    
     // to allow latitude to be a string for input and any changes, then converting back to float data type
     var strLat: String {
         get {
@@ -67,6 +54,20 @@ extension Place {
                 return
             }
             self.placeLatitude = placeLatitude
+        }
+    }
+    
+    // switched lat and long, as lat goes first typically
+    // to allow longitude to be a string for input and any changes, then converting back to float data type
+    var strLong: String {
+        get {
+            "\(self.placeLongitude)"
+        }
+        set {
+            guard let placeLongitude = Double(newValue) else {
+                return
+            }
+            self.placeLongitude = placeLongitude
         }
     }
 
@@ -113,4 +114,25 @@ func saveData() {
     }catch {
         print("Error to save with \(error)")
     }
+}
+
+// create function to load default places
+func loadDefaultPlaces() {
+      let defaultPlaces = [["Mt Tamborine", "Beautiful views!", "-27.942164", "153.193649", "https://www.mustdogoldcoast.com/sites/mustdogoldcoast/files/styles/mdb_category_blue_node_large/public/featured/Hero%20st-bernards2017-09-19-00.51.21_0%20%281%29.jpg?itok=eNYlsor2"],
+            // next default place
+            ["Mt Tamborine", "Beautiful views!", "-27.942164", "153.193649", "https://www.mustdogoldcoast.com/sites/mustdogoldcoast/files/styles/mdb_category_blue_node_large/public/featured/Hero%20st-bernards2017-09-19-00.51.21_0%20%281%29.jpg?itok=eNYlsor2"],
+            // next default place
+            ["Mt Tamborine", "Beautiful views!", "-27.942164", "153.193649", "https://www.mustdogoldcoast.com/sites/mustdogoldcoast/files/styles/mdb_category_blue_node_large/public/featured/Hero%20st-bernards2017-09-19-00.51.21_0%20%281%29.jpg?itok=eNYlsor2"]]
+    
+    let ctx = PersistenceController.shared.container.viewContext
+
+    defaultPlaces.forEach {
+        let place = Place(context: ctx)
+        place.strName = $0[0]
+        place.strDesc = $0[1]
+        place.strLat = $0[2]
+        place.strLong = $0[3]
+        place.strURL = $0[4]
+    }
+    saveData()
 }

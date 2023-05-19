@@ -75,4 +75,9 @@ Created test (and commented) in FavouritePlacesTests, which checks that each vie
 ## Second Milestone
 ### 10/05/23
 Need to load default places, as currently the places only save on my device, but will not appear for others. Added the loadDefaultPlace function with 3 places that are automatically displayed for user.
-In ContentView,
+In ContentView, changed the title of the 2 other default places, only shows Mt Tamborine 3x in a row. Will need to fix later.
+
+### 19/05/23
+Created LocationView, that will be used to show map and allows user to interact with map.
+In DetailView, each place should have a picture of its google map location and the name of the location. This will replace the longitude and latitude textfield/text in DetailView. I first comment out long/lat.
+DetailView needs to be connected to LocationView, as each place will have its own map. Used NavigationLink to do so.

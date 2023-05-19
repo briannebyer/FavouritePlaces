@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C49C5052A172984005A3592 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C49C5042A172984005A3592 /* LocationView.swift */; };
 		1C81643A29F8A43A00E89D70 /* FavouritePlacesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C81643929F8A43A00E89D70 /* FavouritePlacesApp.swift */; };
 		1C81643C29F8A43A00E89D70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C81643B29F8A43A00E89D70 /* ContentView.swift */; };
 		1C81643E29F8A43C00E89D70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1C81643D29F8A43C00E89D70 /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C49C5042A172984005A3592 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		1C81643629F8A43A00E89D70 /* FavouritePlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FavouritePlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C81643929F8A43A00E89D70 /* FavouritePlacesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePlacesApp.swift; sourceTree = "<group>"; };
 		1C81643B29F8A43A00E89D70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				1C81643B29F8A43A00E89D70 /* ContentView.swift */,
 				1C81646A29F8A57A00E89D70 /* RowView.swift */,
 				1C81646829F8A56600E89D70 /* DetailView.swift */,
+				1C49C5042A172984005A3592 /* LocationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -310,6 +313,7 @@
 				1C81646929F8A56600E89D70 /* DetailView.swift in Sources */,
 				1C81643A29F8A43A00E89D70 /* FavouritePlacesApp.swift in Sources */,
 				1C81646F29F8A5B600E89D70 /* SearchView.swift in Sources */,
+				1C49C5052A172984005A3592 /* LocationView.swift in Sources */,
 				1C81646B29F8A57A00E89D70 /* RowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -39,18 +39,21 @@ struct DetailView: View {
                                 .font(.caption)
                         }
                         Spacer()
-                        HStack {
-                            Text("Longitude: ")
-                                .foregroundColor(.gray)
-                            Spacer()
-                            Text("\(locationLong)")
-                        }
-                        HStack {
-                            Text("Latitude: ")
-                                .foregroundColor(.gray)
-                            Spacer()
-                            Text("\(locationLat)")
-                        }
+                        NavigationLink(destination: LocationView()) {
+                                            Text("Map")
+                                        }
+//                        HStack {
+//                            Text("Longitude: ")
+//                                .foregroundColor(.gray)
+//                            Spacer()
+//                            Text("\(locationLong)")
+//                        }
+//                        HStack {
+//                            Text("Latitude: ")
+//                                .foregroundColor(.gray)
+//                            Spacer()
+//                            Text("\(locationLat)")
+//                        }
                     }
                 }
             } else {
@@ -59,10 +62,10 @@ struct DetailView: View {
                         .foregroundColor(.gray)
                     TextField("Enter image URL: ", text: $locationURL)
                         .foregroundColor(.gray)
-                    TextField("Enter additional details: ", text: $locationDetail)
-                        .foregroundColor(.gray)
-                    TextField("Enter longitude: ", text: $locationLong)
-                        .foregroundColor(.gray)
+                   // TextField("Enter additional details: ", text: $locationDetail)
+                   //     .foregroundColor(.gray)
+                   // TextField("Enter longitude: ", text: $locationLong)
+                   //     .foregroundColor(.gray)
                     TextField("Enter latitude: ", text: $locationLat)
                         .foregroundColor(.gray)
                 }
@@ -83,8 +86,8 @@ struct DetailView: View {
                     if isEditing {
                         place.strName = locationName
                         place.strURL = locationURL
-                        place.strDesc = locationDetail
-                        place.strLong = locationLong
+                        //place.strDesc = locationDetail
+                        //place.strLong = locationLong
                         place.strLat = locationLat
                         saveData()
                         Task {

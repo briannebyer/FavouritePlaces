@@ -31,7 +31,16 @@ struct LocationView: View {
             HStack {
                 Text("Lat/Long")
             }
-        }
+        }.navigationTitle("Map of ____ ")
+            .navigationBarItems(leading: Button(action : {
+                // something here later
+            }) {
+               Text("Place name here")
+            }, trailing: Button(action: {
+                // something here later
+            }) {
+                Text("Edit")
+            })
     }
 }
 

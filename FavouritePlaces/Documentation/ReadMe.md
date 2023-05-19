@@ -81,3 +81,6 @@ In ContentView, changed the title of the 2 other default places, only shows Mt T
 Created LocationView, that will be used to show map and allows user to interact with map.
 In DetailView, each place should have a picture of its google map location and the name of the location. This will replace the longitude and latitude textfield/text in DetailView. I first comment out long/lat.
 DetailView needs to be connected to LocationView, as each place will have its own map. Used NavigationLink to do so.
+
+To display map, LocationView uses MapKit and requires a longitude, latitude, rangeMeter and degreeDelta. Current values are default, so each place currently has the same map view (will change soon).
+Added text of where the address and long/lat will later be a textfield, so that a user can search/find places. A slider has been added, but does not work yet.

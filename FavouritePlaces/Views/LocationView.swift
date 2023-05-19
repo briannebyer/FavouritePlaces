@@ -18,10 +18,15 @@ struct LocationView: View {
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: deltaDegree, longitudeDelta: deltaDegree) )
     @State var zoom = 10.0
     
+    //
+    @Binding var pLatitude: String
+    @Binding var pLongitude: String
+    @Binding var pName: String
+    
     var body: some View {
         VStack {
             HStack {
-                Text("Address")
+                Text("\(pName)")
             }
             Slider(value: $zoom, in: 10...60) {
                 print($0)
@@ -30,8 +35,10 @@ struct LocationView: View {
             
             HStack {
                 Text("Lat/Long")
+                Text("\(pLatitude)")
+                Text("\(pLongitude)")
             }
-        }.navigationTitle("Map of ____ ")
+        }.navigationTitle("Map of \(pName) ")
             .navigationBarItems(leading: Button(action : {
                 // something here later
             }) {

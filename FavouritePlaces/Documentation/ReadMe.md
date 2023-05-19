@@ -85,3 +85,5 @@ DetailView needs to be connected to LocationView, as each place will have its ow
 To display map, LocationView uses MapKit and requires a longitude, latitude, rangeMeter and degreeDelta. Current values are default, so each place currently has the same map view (will change soon).
 Added text of where the address and long/lat will later be a textfield, so that a user can search/find places. A slider has been added, but does not work yet.
 Added NavigationTitle and NavigationBar to LocationView.
+
+To make sure each place has its own map, we need to bind longitude and latitude to its own LocationView. Used @Binding in LocationView, so any changes will be made to DetailView. locationName uses @Binding also, for the NavTitle and address text (soon to be textfield).

@@ -39,8 +39,8 @@ struct DetailView: View {
                                 .font(.caption)
                         }
                         Spacer()
-                        NavigationLink(destination: LocationView()) {
-                                            Text("Map")
+                        NavigationLink(destination: LocationView(pLatitude: $locationLat, pLongitude: $locationLong, pName: $locationName)) {
+                                            Text("Map of \(locationName)")
                                         }
 //                        HStack {
 //                            Text("Longitude: ")

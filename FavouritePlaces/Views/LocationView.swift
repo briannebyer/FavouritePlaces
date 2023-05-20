@@ -17,7 +17,8 @@ var deltaDegree = 0.05
 struct LocationView: View {
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: deltaDegree, longitudeDelta: deltaDegree) )
     @State var zoom = 10.0
-    
+    // for editing
+    @State var isEditing = false
     @Binding var pLatitude: String
     @Binding var pLongitude: String
     @Binding var pName: String
@@ -26,23 +27,35 @@ struct LocationView: View {
     
     var body: some View {
         VStack (alignment: .center){
-            HStack {
-//                Text("\(pName)")
-//                    .font(.headline)
+            if !isEditing {
+    //            Slider(value: $zoom, in: 10...60) {
+    //                print($0)
+    //            }
+                Map(coordinateRegion: $region)
+                
+                VStack {
+                    Text("Latitude: \(pLatitude)")
+                        .font(.subheadline)
+                    Text("Longitude: \(pLongitude)")
+                        .font(.subheadline)
+                }
+            // when editing
+            } else {
+                HStack {
+                    TextField("Enter location name: ", text: $pName)
+                        .foregroundColor(.gray)
+                }
+                Map(coordinateRegion: $region)
+                
+                VStack {
+                    TextField("Enter latitude: ", text: $pLatitude)
+                        .foregroundColor(.gray)
+                    TextField("Enter longitude: ", text: $pLongitude)
+                        .foregroundColor(.gray)
+                }
             }
-//            Slider(value: $zoom, in: 10...60) {
-//                print($0)
-//            }
-            Map(coordinateRegion: $region)
-            
-            VStack {
-                Text("Latitude: \(pLatitude)")
-                    .font(.subheadline)
-                Text("Longitude: \(pLongitude)")
-                    .font(.subheadline)
 
-            }
-        }.navigationTitle("Map of \(pName) ")
+        }.navigationTitle(isEditing ? "Update place" : "Map of \(pName) ")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action : {
                 presentationMode.wrappedValue.dismiss()
@@ -51,10 +64,18 @@ struct LocationView: View {
                     .foregroundColor(.blue)
                Text("\(pName)")
             }, trailing: Button(action: {
-                // something here later
+                if isEditing {
+                    //place.strLong = locationLong
+                    //place.strLat = locationLat
+                }
+                isEditing.toggle()
             }) {
-                Text("Edit")
+                Text(isEditing ? "Done" : "Edit")
             })
+            .onAppear {
+                //locationLong = place.strLong
+                //locationLat = place.strLat
+            }
     }
 }
 

@@ -20,7 +20,6 @@ struct DetailView: View {
     @State var image = defaultImage
     // to change default back button
     @Environment(\.presentationMode) var presentationMode
-    // var viewContext: NSManagedObjectContext
     
     var body: some View {
         VStack {
@@ -42,18 +41,6 @@ struct DetailView: View {
                         NavigationLink(destination: LocationView(pLatitude: $locationLat, pLongitude: $locationLong, pName: $locationName)) {
                                             Text("Map of \(locationName)")
                                         }
-//                        HStack {
-//                            Text("Longitude: ")
-//                                .foregroundColor(.gray)
-//                            Spacer()
-//                            Text("\(locationLong)")
-//                        }
-//                        HStack {
-//                            Text("Latitude: ")
-//                                .foregroundColor(.gray)
-//                            Spacer()
-//                            Text("\(locationLat)")
-//                        }
                     }
                 }
             } else {
@@ -64,10 +51,6 @@ struct DetailView: View {
                         .foregroundColor(.gray)
                     TextField("Enter additional details: ", text: $locationDetail)
                         .foregroundColor(.gray)
-                   // TextField("Enter longitude: ", text: $locationLong)
-                   //     .foregroundColor(.gray)
-//                    TextField("Enter latitude: ", text: $locationLat)
-//                        .foregroundColor(.gray)
                 }
             }
 
@@ -87,8 +70,6 @@ struct DetailView: View {
                         place.strName = locationName
                         place.strURL = locationURL
                         place.strDesc = locationDetail
-                        //place.strLong = locationLong
-                        //place.strLat = locationLat
                         saveData()
                         Task {
                             image = await place.getImage()
@@ -104,8 +85,6 @@ struct DetailView: View {
                 locationName = place.strName
                 locationURL = place.strURL
                 locationDetail = place.strDesc
-                locationLong = place.strLong
-                locationLat = place.strLat
                 
             }.task {
                 await image = place.getImage()

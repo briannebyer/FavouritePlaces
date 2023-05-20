@@ -29,8 +29,7 @@ struct ContentView: View {
                 }
             List {
                 ForEach(places) { place in
-                    NavigationLink(destination: DetailView(place: place //viewContext: NSManagedObjectContext
-                                                          )) {
+                    NavigationLink(destination: DetailView(place: place)) {
                         RowView(place: place)
                     }
                     
@@ -82,19 +81,6 @@ struct ContentView: View {
             saveData()
         }
     }
-
-//    private func movePlace(from source: IndexSet, to destination: Int) {
-//        withAnimation {
-//            var revisedPlace: [Place] = places.map {$0}
-//            revisedPlace.move(fromOffsets: source, toOffset: destination)
-//            for reverseIndex in stride(from: revisedPlace.count - 1, through: 0, by: -1) {
-//                let place = revisedPlace[reverseIndex]
-//                place.placePosition = Int16(reverseIndex)
-//            }
-//            //places = revisedPlace // to update position
-//            saveData()
-//        }
-//    }
     
     /**
     This function saves any changes made to the viewContext.

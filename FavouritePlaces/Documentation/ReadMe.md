@@ -91,3 +91,6 @@ To make sure each place has its own map, we need to bind longitude and latitude 
 To keep UI consistency, made sure that the back button of LocationView had the same icon as LocationView. 
 Formatted Text (long, lat and name), aligned text for best UI practices.
 Made sure back button uses the name of place, easier for the user to understand they are returning the places information screen.
+
+Removed unneccessary comments in Views.
+Formatted LocationView when user changes between editing and viewing LocationView. Such as changing text to textfields for long/lat and name. Aesthetic changes done also, like font and foregound colour.

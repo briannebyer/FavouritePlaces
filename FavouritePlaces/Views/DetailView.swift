@@ -70,6 +70,8 @@ struct DetailView: View {
                         place.strName = locationName
                         place.strURL = locationURL
                         place.strDesc = locationDetail
+                        place.strLong = locationLong
+                        place.strLat = locationLat
                         saveData()
                         Task {
                             image = await place.getImage()
@@ -85,6 +87,8 @@ struct DetailView: View {
                 locationName = place.strName
                 locationURL = place.strURL
                 locationDetail = place.strDesc
+                locationLong = place.strLong
+                locationLat = place.strLat
                 
             }.task {
                 await image = place.getImage()

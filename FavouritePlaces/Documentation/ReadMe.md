@@ -86,6 +86,7 @@ To display map, LocationView uses MapKit and requires a longitude, latitude, ran
 Added text of where the address and long/lat will later be a textfield, so that a user can search/find places. A slider has been added, but does not work yet.
 Added NavigationTitle and NavigationBar to LocationView.
 
+### 20/05/23
 To make sure each place has its own map, we need to bind longitude and latitude to its own LocationView. Used @Binding in LocationView, so any changes will be made to DetailView. locationName uses @Binding also, for the NavTitle and address text (soon to be textfield).
 
 To keep UI consistency, made sure that the back button of LocationView had the same icon as LocationView. 
@@ -94,3 +95,6 @@ Made sure back button uses the name of place, easier for the user to understand 
 
 Removed unneccessary comments in Views.
 Formatted LocationView when user changes between editing and viewing LocationView. Such as changing text to textfields for long/lat and name. Aesthetic changes done also, like font and foregound colour.
+
+Realised that my default places do appear in app (not just Mt Tamborine 3x in a row), this is because they only load if there is 0 places created by user. At the time, it did not update as the user had 3 places (Mt Tamborine 3 times!). Added new favourite places to default data.
+Noticed that latitude and longitude are not appearing in LocationView, even though they should. Made sure that ifEditing in DetailView, the lat and long are saved.

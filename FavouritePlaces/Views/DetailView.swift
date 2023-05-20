@@ -62,12 +62,12 @@ struct DetailView: View {
                         .foregroundColor(.gray)
                     TextField("Enter image URL: ", text: $locationURL)
                         .foregroundColor(.gray)
-                   // TextField("Enter additional details: ", text: $locationDetail)
-                   //     .foregroundColor(.gray)
+                    TextField("Enter additional details: ", text: $locationDetail)
+                        .foregroundColor(.gray)
                    // TextField("Enter longitude: ", text: $locationLong)
                    //     .foregroundColor(.gray)
-                    TextField("Enter latitude: ", text: $locationLat)
-                        .foregroundColor(.gray)
+//                    TextField("Enter latitude: ", text: $locationLat)
+//                        .foregroundColor(.gray)
                 }
             }
 
@@ -86,9 +86,9 @@ struct DetailView: View {
                     if isEditing {
                         place.strName = locationName
                         place.strURL = locationURL
-                        //place.strDesc = locationDetail
+                        place.strDesc = locationDetail
                         //place.strLong = locationLong
-                        place.strLat = locationLat
+                        //place.strLat = locationLat
                         saveData()
                         Task {
                             image = await place.getImage()

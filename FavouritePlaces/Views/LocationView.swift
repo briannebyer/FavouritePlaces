@@ -18,31 +18,38 @@ struct LocationView: View {
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: deltaDegree, longitudeDelta: deltaDegree) )
     @State var zoom = 10.0
     
-    //
     @Binding var pLatitude: String
     @Binding var pLongitude: String
     @Binding var pName: String
+    // to change default back button
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack {
+        VStack (alignment: .center){
             HStack {
-                Text("\(pName)")
+//                Text("\(pName)")
+//                    .font(.headline)
             }
-            Slider(value: $zoom, in: 10...60) {
-                print($0)
-            }
+//            Slider(value: $zoom, in: 10...60) {
+//                print($0)
+//            }
             Map(coordinateRegion: $region)
             
-            HStack {
-                Text("Lat/Long")
-                Text("\(pLatitude)")
-                Text("\(pLongitude)")
+            VStack {
+                Text("Latitude: \(pLatitude)")
+                    .font(.subheadline)
+                Text("Longitude: \(pLongitude)")
+                    .font(.subheadline)
+
             }
         }.navigationTitle("Map of \(pName) ")
+            .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action : {
-                // something here later
+                presentationMode.wrappedValue.dismiss()
             }) {
-               Text("Place name here")
+                Image(systemName: "arrow.left")
+                    .foregroundColor(.blue)
+               Text("\(pName)")
             }, trailing: Button(action: {
                 // something here later
             }) {

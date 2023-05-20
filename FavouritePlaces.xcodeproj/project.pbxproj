@@ -114,7 +114,6 @@
 				1C81646729F8A53500E89D70 /* Documentation */,
 				1C81646629F8A52600E89D70 /* Data */,
 				1C81646529F8A52000E89D70 /* Views */,
-				1C81643D29F8A43C00E89D70 /* Assets.xcassets */,
 				1C81643F29F8A43C00E89D70 /* Preview Content */,
 			);
 			path = FavouritePlaces;
@@ -154,6 +153,7 @@
 				1C81646A29F8A57A00E89D70 /* RowView.swift */,
 				1C81646829F8A56600E89D70 /* DetailView.swift */,
 				1C49C5042A172984005A3592 /* LocationView.swift */,
+				1C81643D29F8A43C00E89D70 /* Assets.xcassets */,
 			);
 			path = Views;
 			sourceTree = "<group>";

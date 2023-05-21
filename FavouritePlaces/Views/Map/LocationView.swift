@@ -9,56 +9,66 @@ import SwiftUI
 import MapKit
 import CoreData
 
-//// for map
-//var latitude = -27.470125
-//var longitude = 153.021072
-//var rangeMeter = 10_000.00
-//// bigger the degree, the longer the span
-//var deltaDegree = 0.05
-
 struct LocationView: View {
     var place: Place
     // for map, using new class
     @StateObject var modelMap: MapLocation
-//    @State var pZoom = 10.0
-//    @State var pLatitude: String
-//    @State var pLongitude: String
-//    @State var pName: String
-    // for editing
+    @State var mZoom = 10.0
+    @State var mLatitude: String = "0.0"
+    @State var mLongitude: String = "0.0"
     @State var isEditing = false
     // to change default back button
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         VStack (alignment: .center){
-   //         if !isEditing {
-    //            Slider(value: $pZoom, in: 10...60) {
-    //                print($0)
-    //            }
-                Map(coordinateRegion: $modelMap.region)
+            if !isEditing {
+//                Slider(value: $mZoom, in: 10...60) {
+//                    if !0 {
+//                        checkZoom()
+//                    }
+//                }
                 
-//                VStack {
-//                    Text("Latitude: \(pLatitude)")
-//                        .font(.subheadline)
-//                    Text("Longitude: \(pLongitude)")
-//                        .font(.subheadline)
-//                }
+                ZStack {
+                    Map(coordinateRegion: $modelMap.region)
+                }
+                
+                VStack {
+                    // uses place's current latitude to center map
+                    Text("Latitude: \(modelMap.region.center.latitude)")
+                        .font(.subheadline)
+                    // uses places current longitude to center map
+                    Text("Longitude: \(modelMap.region.center.longitude)")
+                        .font(.subheadline)
+                }
             // when editing
-//            } else {
-//                HStack {
-//                    Text("\(pName)")
-////                    TextField("Enter location name: ", text: $pName)
-////                        .foregroundColor(.gray)
-//                }
-//                Map(coordinateRegion: $modelMap.region)
-//
-//                VStack {
-//                    TextField("Enter latitude: ", text: $pLatitude)
-//                        .foregroundColor(.gray)
-//                    TextField("Enter longitude: ", text: $pLongitude)
-//                        .foregroundColor(.gray)
-//                }
-//            }
+            } else {
+                HStack {
+                    TextField("Place name: ", text: $modelMap.name)
+                    Image(systemName: "sparkle.magnifyingglass")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            //checkAddress()
+                        }
+                }
+                
+                ZStack {
+                    Map(coordinateRegion: $modelMap.region)
+                }
+
+                VStack {
+                    TextField("Enter latitude: ", text: $mLatitude)
+                        .foregroundColor(.gray)
+                    TextField("Enter longitude: ", text: $mLongitude)
+                        .foregroundColor(.gray)
+                    Image(systemName: "sparkle.magnifyingglass")
+                        .foregroundColor(.blue)
+                        .onTapGesture {
+                            //checkLocation
+                        }
+                    
+                }
+            }
 
         }.navigationTitle(isEditing ? "Update place" : "Map of Place")
             .navigationBarBackButtonHidden(true)
@@ -70,9 +80,9 @@ struct LocationView: View {
                Text("Place")
             }, trailing: Button(action: {
                 if isEditing {
-                    //place.placeName = locationName
-//                    place.strLong = pLongitude
-//                    place.strLat = pLatitude
+                    place.strLong = mLongitude
+                    place.strLat = mLatitude
+                    // then after checking, saves
                     saveData()
                 }
                 isEditing.toggle()
@@ -80,10 +90,21 @@ struct LocationView: View {
                 Text(isEditing ? "Done" : "Edit")
             })
             .onAppear {
-                // locationName = place.placeName
-//                pLongitude = place.strLong
-//                pLatitude = place.strLat
+                mLongitude = place.strLong
+                mLatitude = place.strLat
             }
+    }
+    
+    func checkAddress() {
+        
+    }
+    
+    func checkLocation() {
+        
+    }
+    
+    func checkZoom() {
+        
     }
 }
 

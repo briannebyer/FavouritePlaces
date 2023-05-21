@@ -49,7 +49,7 @@ struct DetailView: View {
                                 .font(.caption)
                         }
                         Spacer()
-                        NavigationLink(destination: LocationView(place: place, modelMap: modelMap)) {
+                        NavigationLink(destination: LocationView(place: place, modelMap: modelMap)){
                             // show snippet
                             Map(coordinateRegion: $mapSnippet)
                                 .frame(width: 50, height: 50, alignment: .leading)

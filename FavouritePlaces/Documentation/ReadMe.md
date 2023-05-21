@@ -104,7 +104,7 @@ Noticed that is not a requirement to change the name of a place in LocationView,
 ###21/05/23
 In order to be able to save longitude and latitude changes, I imported CoreData and declared var place to be used in LocationView. place.strLong equals to pLongitude and vice versa. Made sure to pass place from ContentView, to DetailView and then to LocationView. Any long and lat changes are now saved. Map not working yet.
 
-I need to way to update the map according to changes in longitude and latitude (later milstones including name of place).
+I need to way to update the map according to changes in longitude and latitude, as well as name.
 Created a DataModel, which will hold the class used for each place's map (MapLocation). As each variable is published, this means that views can react if they change.
 Created a LocationViewModel, which will handle any functions or extensions used for LocationView. Both new swift files grouped under Map folder.
 To be able to use DataModel, needs to be referred to in FavouritePlacesApp. It also must be referred to in ContentView so the model's class can be passed and updated throughout the views. In each view, the model is referred to.
@@ -114,5 +114,11 @@ Another requirement of M2 is to see a small snippet of the location, from the pl
 I used an instance of the MKCoordinatorRegion, which is based off the place's long and lat values (also being set as the center of the map snippet).
 
 I realised that in DetailView, the reason why changes were not updating was due to not using onDisappear. Made sure to saveData(). This fixed the issue, but I am still unable to see changes in ContentView.
+
+Back to the map in LocationView, commented code was uncommented and adjusted according to new use of class. 
+In LocationViewModel, in order to use the class, we need to make an extension, so that lat and long of that class can be converted to Double. This will allow lat and long to be used for place's map. This is to also ensure they stay within the range of a realistic longitude and latitude.
+Able to see long and lat change when interacting with map.
+
+I need to be able to change the map according to the name and/or the lat/long when user is in editMode. Two functions will need to be made to handle changes..
 
 

@@ -48,7 +48,7 @@ extension MapLocation {
         let coder = CLGeocoder()
         coder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { marks, error in
             if let err = error {
-                print("errof in fromLocToAddress: \(err)")
+                print("error in fromLocToAddress: \(err)")
                 return
             }
             let mark = marks?.first
@@ -56,6 +56,23 @@ extension MapLocation {
             self.name = name
         }
         
+    }
+
+    func fromAddressToLoc(_ cb:@escaping ()-> Void){
+        let encode = CLGeocoder()
+        encode.geocodeAddressString(self.name){
+            marks, error in
+            if let err = error {
+                print("error in fromAddressToLoc \(err)")
+                return
+            }
+            if let mark = marks?.first {
+                self.latitude = mark.location?.coordinate.latitude ?? self.latitude
+                self.longitude = mark.location?.coordinate.longitude ?? self.longitude
+                cb()
+                self.setupRegion()
+            }
+        }
     }
     
 // might need to play around with d values

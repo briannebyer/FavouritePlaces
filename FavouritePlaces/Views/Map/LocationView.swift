@@ -56,7 +56,7 @@ struct LocationView: View {
                     Image(systemName: "sparkle.magnifyingglass")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                          //checkAddress
+                          checkAddress()
                         }
                 }
                 
@@ -108,7 +108,18 @@ struct LocationView: View {
     }
     
     func checkAddress() {
-        
+        DispatchQueue.main.async {
+            modelMap.fromAddressToLoc(updateViewLoc)
+            // save
+            }
+        }
+    
+    func updateViewLoc() {
+        mLatitude = modelMap.mlatStr
+        mLongitude = modelMap.mlongStr
+        modelMap.mlongStr = mLongitude
+        modelMap.mlatStr = mLatitude
+        //save
     }
     
     func checkLocation() {
@@ -119,6 +130,7 @@ struct LocationView: View {
     }
     
     func checkZoom() {
+        checkMap()
         modelMap.fromZoomToDelta(mZoom)
         modelMap.fromLocToAddress()
         modelMap.setupRegion()
@@ -132,5 +144,6 @@ struct LocationView: View {
         // checks long/lat and finds name of location
         modelMap.fromLocToAddress()
     }
+    
 }
 

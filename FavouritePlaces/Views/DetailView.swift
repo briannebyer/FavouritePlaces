@@ -114,7 +114,16 @@ struct DetailView: View {
                 self.mapSnippet.span.latitudeDelta = mapdelta
                 self.mapSnippet.span.latitudeDelta = mapdelta
             
-            }.task {
+            }.onDisappear(){
+                place.strName = locationName
+                place.strURL = locationURL
+                place.strDesc = locationDetail
+                place.strLong = locationLong
+                place.strLat = locationLat
+                saveData()
+            }
+            
+            .task {
                 await image = place.getImage()
             }
     }

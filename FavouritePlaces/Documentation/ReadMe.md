@@ -113,4 +113,6 @@ Commented out code that needs to be updated, now that I am using the class's map
 Another requirement of M2 is to see a small snippet of the location, from the place's map.
 I used an instance of the MKCoordinatorRegion, which is based off the place's long and lat values (also being set as the center of the map snippet).
 
+I realised that in DetailView, the reason why changes were not updating was due to not using onDisappear. Made sure to saveData(). This fixed the issue, but I am still unable to see changes in ContentView.
+
 

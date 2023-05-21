@@ -127,4 +127,7 @@ In checkLocation() from LocationView, we make sure that mLongStr/mLatStr is equa
 Uncommented slider to be able to zoom on map. Added checkZoom(), which uses the funcs from LocationViewModel to function.
 Created func checkAddress(), which uses fromAddressToLoc() in LocationViewModel. fromAddressToLoc also refers to updateViewLoc. Please see comments and documentation for explanation of how the map operates.
 
+Simplified UI of LocationView.
+Using saveData() throughout LocationView to have persistency in app.
+
 

@@ -27,13 +27,6 @@ struct LocationView: View {
                 ZStack {
                     Map(coordinateRegion: $modelMap.region)
                 }
-                
-                Slider(value: $mZoom, in: 10...60) {
-                    if !$0 {
-                        checkZoom()
-                    }
-                }
-                
                 VStack {
                     // uses place's current latitude to center map
                     Text("Latitude: \(modelMap.region.center.latitude)")
@@ -41,13 +34,14 @@ struct LocationView: View {
                     // uses places current longitude to center map
                     Text("Longitude: \(modelMap.region.center.longitude)")
                         .font(.subheadline)
-                    Button("Update"){
+                    Button("Update Coordinates"){
                         checkMap()
-                    }
-                    
-                    TextField("Lat: ", text: $mLatitude)
-                    TextField("Long: ", text: $mLongitude)
-
+                        // update
+                        place.strLat = mLatitude
+                        place.strLong = mLongitude
+                        // save
+                        saveData()
+                }
                 }
             // when editing
             } else {
@@ -60,6 +54,13 @@ struct LocationView: View {
                         }
                 }
                 
+                Slider(value: $mZoom, in: 10...60) {
+                    if !$0 {
+                        checkZoom()
+                        saveData()
+                    }
+                }
+                
                 ZStack {
                     Map(coordinateRegion: $modelMap.region)
                 }
@@ -69,17 +70,10 @@ struct LocationView: View {
                         .foregroundColor(.gray)
                     TextField("Enter longitude: ", text: $mLongitude)
                         .foregroundColor(.gray)
-                    Image(systemName: "sparkle.magnifyingglass")
-                        .foregroundColor(.blue)
-                        .onTapGesture {
-                            //checkMap()
-                            checkLocation()
-                        }
-                    
                 }
             }
 
-        }.navigationTitle(isEditing ? "Update place" : "Map of \(modelMap.name)")
+        }.navigationTitle(isEditing ? "Update place" : "Map of \(place.strName)")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action : {
                 presentationMode.wrappedValue.dismiss()
@@ -89,22 +83,12 @@ struct LocationView: View {
                Text("Place")
             }, trailing: Button(action: {
                 if isEditing {
-//                    place.strLong = mLongitude
-//                    place.strLat = mLatitude
-                    // then after checking, saves
-//                    saveData()
+                    checkLocation()
                 }
                 isEditing.toggle()
             }) {
                 Text(isEditing ? "Done" : "Edit")
             })
-//            .onAppear {
-//                mLongitude = place.strLong
-//                mLatitude = place.strLat
-//            }
-//            .task {
-//                checkMap()
-//            }
     }
     
     func checkAddress() {

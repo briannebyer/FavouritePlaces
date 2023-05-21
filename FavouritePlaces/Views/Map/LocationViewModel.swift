@@ -11,7 +11,6 @@ import CoreLocation
 import MapKit
 import SwiftUI
 
-
 // for map
 extension MapLocation {
     var mlatStr: String {

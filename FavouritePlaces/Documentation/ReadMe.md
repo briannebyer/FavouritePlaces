@@ -124,6 +124,8 @@ In LocationView, created a function called checkMap(). checkMap calls the update
 
 I can currently change coordinates and name according to map position, but not according to user input.
 In checkLocation() from LocationView, we make sure that mLongStr/mLatStr is equal to mLat/mLong. 
-In LocationViewModel,
+
+Uncommented slider to be able to zoom on map. Added checkZoom(), which uses the funcs from LocationViewModel to function.
+checkAddress()
 
 

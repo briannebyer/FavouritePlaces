@@ -57,4 +57,11 @@ extension MapLocation {
         }
         
     }
+    
+// might need to play around with d values
+    func fromZoomToDelta(_ zoom: Double){
+        let d1 = -10.0
+        let d2 = 3.0
+        delta = pow(10.0, zoom / d1 + d2)
+    }
 }

@@ -24,14 +24,14 @@ struct LocationView: View {
     var body: some View {
         VStack (alignment: .center){
             if !isEditing {
-//                Slider(value: $mZoom, in: 10...60) {
-//                    if !0 {
-//                        checkZoom()
-//                    }
-//                }
-                
                 ZStack {
                     Map(coordinateRegion: $modelMap.region)
+                }
+                
+                Slider(value: $mZoom, in: 10...60) {
+                    if !$0 {
+                        checkZoom()
+                    }
                 }
                 
                 VStack {
@@ -119,7 +119,9 @@ struct LocationView: View {
     }
     
     func checkZoom() {
-        
+        modelMap.fromZoomToDelta(mZoom)
+        modelMap.fromLocToAddress()
+        modelMap.setupRegion()
     }
     
     func checkMap() {

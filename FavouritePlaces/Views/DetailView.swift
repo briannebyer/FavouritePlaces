@@ -24,6 +24,13 @@ struct DetailView: View {
     @Environment(\.presentationMode) var presentationMode
     // for map
     @ObservedObject var modelMap: MapLocation
+    // for map snippet
+    @State var mapdelta = 20.0
+    var d1 = -10.0
+    var d2 = 3.5
+    var zoom = 100.0
+    
+    @State private var mapSnippet = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
     var body: some View {
         VStack {
@@ -43,9 +50,13 @@ struct DetailView: View {
                         }
                         Spacer()
                         NavigationLink(destination: LocationView(place: place, modelMap: modelMap)) {
+                            // show snippet
+                            Map(coordinateRegion: $mapSnippet)
+                                .frame(width: 50, height: 50, alignment: .leading)
                                             Text("Map of \(locationName)")
                                         }
                     }
+
                 }
             } else {
                 List {
@@ -94,6 +105,15 @@ struct DetailView: View {
                 locationLong = place.strLong
                 locationLat = place.strLat
                 
+                // for map snippet
+                mapdelta = pow(10.0, zoom/d1+d2)
+                // center of snippet
+                self.mapSnippet.center.latitude = Double(place.strLat) ?? 0
+                self.mapSnippet.center.longitude = Double(place.strLong) ?? 0
+                // span of snippet (square)
+                self.mapSnippet.span.latitudeDelta = mapdelta
+                self.mapSnippet.span.latitudeDelta = mapdelta
+            
             }.task {
                 await image = place.getImage()
             }

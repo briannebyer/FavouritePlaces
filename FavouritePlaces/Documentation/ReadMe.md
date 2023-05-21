@@ -110,3 +110,7 @@ Created a LocationViewModel, which will handle any functions or extensions used 
 To be able to use DataModel, needs to be referred to in FavouritePlacesApp. It also must be referred to in ContentView so the model's class can be passed and updated throughout the views. In each view, the model is referred to.
 Commented out code that needs to be updated, now that I am using the class's map. Can view and interact with map.
 
+Another requirement of M2 is to see a small snippet of the location, from the place's map.
+I used an instance of the MKCoordinatorRegion, which is based off the place's long and lat values (also being set as the center of the map snippet).
+
+

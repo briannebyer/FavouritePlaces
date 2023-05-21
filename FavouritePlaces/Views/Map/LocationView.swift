@@ -12,10 +12,10 @@ import CoreData
 struct LocationView: View {
     var place: Place
     // for map, using new class
-    @StateObject var modelMap: MapLocation
+    @ObservedObject var modelMap: MapLocation
     @State var mZoom = 10.0
-    @State var mLatitude: String = "0.0"
-    @State var mLongitude: String = "0.0"
+    @Binding var mLatitude: String
+    @Binding var mLongitude: String
     //@State var mName: String
     @State var isEditing = false
     // to change default back button

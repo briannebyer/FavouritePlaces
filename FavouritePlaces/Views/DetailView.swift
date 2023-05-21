@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 import MapKit
 
-
 struct DetailView: View {
     var place: Place
     // refer to entity attributes
@@ -49,7 +48,7 @@ struct DetailView: View {
                                 .font(.caption)
                         }
                         Spacer()
-                        NavigationLink(destination: LocationView(place: place, modelMap: modelMap)){
+                        NavigationLink(destination: LocationView(place: place, modelMap: modelMap, mLatitude: $locationLat, mLongitude: $locationLong)){
                             // show snippet
                             Map(coordinateRegion: $mapSnippet)
                                 .frame(width: 50, height: 50, alignment: .leading)
@@ -112,7 +111,7 @@ struct DetailView: View {
                 self.mapSnippet.center.longitude = Double(place.strLong) ?? 0
                 // span of snippet (square)
                 self.mapSnippet.span.latitudeDelta = mapdelta
-                self.mapSnippet.span.latitudeDelta = mapdelta
+                self.mapSnippet.span.longitudeDelta = mapdelta
             
             }.onDisappear(){
                 place.strName = locationName

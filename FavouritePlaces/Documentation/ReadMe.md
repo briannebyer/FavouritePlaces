@@ -130,4 +130,7 @@ Created func checkAddress(), which uses fromAddressToLoc() in LocationViewModel.
 Simplified UI of LocationView.
 Using saveData() throughout LocationView to have persistency in app.
 
+Attempting to bind DetailView and LocationView, so that initial long and lat show on map for each place. Unable to do so.
+## Thank you for the extension! 21st of May, 2023, 11:59pm
+
 

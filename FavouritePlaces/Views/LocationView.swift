@@ -7,7 +7,9 @@
 
 import SwiftUI
 import MapKit
+import CoreData
 
+// for map
 var latitude = -27.470125
 var longitude = 153.021072
 var rangeMeter = 10_000.00
@@ -15,6 +17,7 @@ var rangeMeter = 10_000.00
 var deltaDegree = 0.05
 
 struct LocationView: View {
+    var place: Place
     @State var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), span: MKCoordinateSpan(latitudeDelta: deltaDegree, longitudeDelta: deltaDegree) )
     @State var zoom = 10.0
     // for editing
@@ -42,8 +45,9 @@ struct LocationView: View {
             // when editing
             } else {
                 HStack {
-                    TextField("Enter location name: ", text: $pName)
-                        .foregroundColor(.gray)
+                    Text("\(pName)")
+//                    TextField("Enter location name: ", text: $pName)
+//                        .foregroundColor(.gray)
                 }
                 Map(coordinateRegion: $region)
                 
@@ -55,7 +59,7 @@ struct LocationView: View {
                 }
             }
 
-        }.navigationTitle(isEditing ? "Update place" : "Map of \(pName) ")
+        }.navigationTitle(isEditing ? "Update place" : "Map of \(pName)")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action : {
                 presentationMode.wrappedValue.dismiss()
@@ -65,16 +69,19 @@ struct LocationView: View {
                Text("\(pName)")
             }, trailing: Button(action: {
                 if isEditing {
-                    //place.strLong = locationLong
-                    //place.strLat = locationLat
+                    //place.placeName = locationName
+                    place.strLong = pLongitude
+                    place.strLat = pLatitude
+                    saveData()
                 }
                 isEditing.toggle()
             }) {
                 Text(isEditing ? "Done" : "Edit")
             })
             .onAppear {
-                //locationLong = place.strLong
-                //locationLat = place.strLat
+                // locationName = place.placeName
+                pLongitude = place.strLong
+                pLatitude = place.strLat
             }
     }
 }

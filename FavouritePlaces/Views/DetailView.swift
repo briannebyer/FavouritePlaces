@@ -7,6 +7,8 @@
 
 import SwiftUI
 import CoreData
+import MapKit
+
 
 struct DetailView: View {
     var place: Place
@@ -38,7 +40,7 @@ struct DetailView: View {
                                 .font(.caption)
                         }
                         Spacer()
-                        NavigationLink(destination: LocationView(pLatitude: $locationLat, pLongitude: $locationLong, pName: $locationName)) {
+                        NavigationLink(destination: LocationView(place: place, pLatitude: $locationLat, pLongitude: $locationLong, pName: $locationName)) {
                                             Text("Map of \(locationName)")
                                         }
                     }

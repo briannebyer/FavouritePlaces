@@ -98,3 +98,10 @@ Formatted LocationView when user changes between editing and viewing LocationVie
 
 Realised that my default places do appear in app (not just Mt Tamborine 3x in a row), this is because they only load if there is 0 places created by user. At the time, it did not update as the user had 3 places (Mt Tamborine 3 times!). Added new favourite places to default data.
 Noticed that latitude and longitude are not appearing in LocationView, even though they should. Made sure that ifEditing in DetailView, the lat and long are saved.
+
+Noticed that is not a requirement to change the name of a place in LocationView, as it may cause confusion. Changed TextField for name back to Text. 
+
+###21/05/23
+In order to be able to save longitude and latitude changes, I imported CoreData and declared var place to be used in LocationView. place.strLong equals to pLongitude and vice versa. Made sure to pass place from ContentView, to DetailView and then to LocationView. Any long and lat changes are now saved. Map not working yet.
+
+

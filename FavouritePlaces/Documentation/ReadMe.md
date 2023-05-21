@@ -119,6 +119,8 @@ Back to the map in LocationView, commented code was uncommented and adjusted acc
 In LocationViewModel, in order to use the class, we need to make an extension, so that lat and long of that class can be converted to Double. This will allow lat and long to be used for place's map. This is to also ensure they stay within the range of a realistic longitude and latitude.
 Able to see long and lat change when interacting with map.
 
-I need to be able to change the map according to the name and/or the lat/long when user is in editMode. Two functions will need to be made to handle changes..
+I need to be able to make sure that when a user changes mLongitude or mLatitude, this impacts the place's coordinates. 
+In LocationView, created a function called checkMap(). checkMap calls the updateFromRegion function in LocationViewModel, which uses the longitude and latitude as the center of the map. It also ensures that mLat/Long is equal to the place's lat/long. Long and lat change, but the user cannot input their own lat and long yet to change map.
+
 
 

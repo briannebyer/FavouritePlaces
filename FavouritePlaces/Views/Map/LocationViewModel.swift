@@ -7,7 +7,9 @@
 
 import Foundation
 import CoreData
+import CoreLocation
 import MapKit
+
 
 // for map
 extension MapLocation {
@@ -25,6 +27,24 @@ extension MapLocation {
             guard let long = Double(newValue), long <= 180.0, long >= -180.0 else {return}
             longitude = long
         }
-
+    }
+    
+    func updateFromRegion() {
+        latitude = region.center.latitude
+        longitude = region.center.longitude
+    }
+    
+    func fromLocToAddress() {
+        let coder = CLGeocoder()
+        coder.reverseGeocodeLocation(CLLocation(latitude: latitude, longitude: longitude)) { marks, error in
+            if let err = error {
+                print("errof in fromLocToAddress: \(err)")
+                return
+            }
+            let mark = marks?.first
+            let name = mark?.name ?? mark?.country ?? mark?.locality ?? mark?.administrativeArea ?? "No name"
+            self.name = name
+        }
+        
     }
 }

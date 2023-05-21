@@ -40,6 +40,9 @@ struct LocationView: View {
                     // uses places current longitude to center map
                     Text("Longitude: \(modelMap.region.center.longitude)")
                         .font(.subheadline)
+                    
+                    Text("\(mLatitude)")
+                    Text("\(mLongitude)")
                 }
             // when editing
             } else {
@@ -64,7 +67,7 @@ struct LocationView: View {
                     Image(systemName: "sparkle.magnifyingglass")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            //checkLocation
+                            checkMap()
                         }
                     
                 }
@@ -89,10 +92,13 @@ struct LocationView: View {
             }) {
                 Text(isEditing ? "Done" : "Edit")
             })
-            .onAppear {
-                mLongitude = place.strLong
-                mLatitude = place.strLat
-            }
+//            .onAppear {
+//                mLongitude = place.strLong
+//                mLatitude = place.strLat
+//            }
+//            .task {
+//                checkMap()
+//            }
     }
     
     func checkAddress() {
@@ -105,6 +111,15 @@ struct LocationView: View {
     
     func checkZoom() {
         
+    }
+    
+    func checkMap() {
+        // checks location on map, finds lat/long
+        modelMap.updateFromRegion()
+        mLatitude = modelMap.mlatStr
+        mLongitude = modelMap.mlongStr
+        // checks long/lat and finds name of location
+        modelMap.fromLocToAddress()
     }
 }
 

@@ -22,6 +22,8 @@ struct DetailView: View {
     @State var image = defaultImage
     // to change default back button
     @Environment(\.presentationMode) var presentationMode
+    // for map
+    @ObservedObject var modelMap: MapLocation
     
     var body: some View {
         VStack {
@@ -40,7 +42,7 @@ struct DetailView: View {
                                 .font(.caption)
                         }
                         Spacer()
-                        NavigationLink(destination: LocationView(place: place, pLatitude: $locationLat, pLongitude: $locationLong, pName: $locationName)) {
+                        NavigationLink(destination: LocationView(place: place, modelMap: modelMap)) {
                                             Text("Map of \(locationName)")
                                         }
                     }

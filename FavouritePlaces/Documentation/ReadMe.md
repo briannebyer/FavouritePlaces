@@ -104,4 +104,9 @@ Noticed that is not a requirement to change the name of a place in LocationView,
 ###21/05/23
 In order to be able to save longitude and latitude changes, I imported CoreData and declared var place to be used in LocationView. place.strLong equals to pLongitude and vice versa. Made sure to pass place from ContentView, to DetailView and then to LocationView. Any long and lat changes are now saved. Map not working yet.
 
+I need to way to update the map according to changes in longitude and latitude (later milstones including name of place).
+Created a DataModel, which will hold the class used for each place's map (MapLocation). As each variable is published, this means that views can react if they change.
+Created a LocationViewModel, which will handle any functions or extensions used for LocationView. Both new swift files grouped under Map folder.
+To be able to use DataModel, needs to be referred to in FavouritePlacesApp. It also must be referred to in ContentView so the model's class can be passed and updated throughout the views. In each view, the model is referred to.
+Commented out code that needs to be updated, now that I am using the class's map. Can view and interact with map.
 

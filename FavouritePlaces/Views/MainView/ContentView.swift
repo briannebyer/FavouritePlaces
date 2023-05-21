@@ -16,6 +16,8 @@ struct ContentView: View {
     // to be able to get data
     @FetchRequest(entity: Place.entity(), sortDescriptors: [NSSortDescriptor(key: "placeName", ascending: true)])
     var places: FetchedResults<Place>
+    // map
+    @ObservedObject var modelMap: MapLocation
     
     var body: some View {
         NavigationView {
@@ -29,7 +31,7 @@ struct ContentView: View {
                 }
             List {
                 ForEach(places) { place in
-                    NavigationLink(destination: DetailView(place: place)) {
+                    NavigationLink(destination: DetailView(place: place, modelMap: modelMap)) {
                         RowView(place: place)
                     }
                     

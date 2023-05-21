@@ -120,7 +120,10 @@ In LocationViewModel, in order to use the class, we need to make an extension, s
 Able to see long and lat change when interacting with map.
 
 I need to be able to make sure that when a user changes mLongitude or mLatitude, this impacts the place's coordinates. 
-In LocationView, created a function called checkMap(). checkMap calls the updateFromRegion function in LocationViewModel, which uses the longitude and latitude as the center of the map. It also ensures that mLat/Long is equal to the place's lat/long. Long and lat change, but the user cannot input their own lat and long yet to change map.
+In LocationView, created a function called checkMap(). checkMap calls the updateFromRegion function in LocationViewModel, which uses the longitude and latitude as the center of the map. It also ensures that mLat/Long is equal to the place's lat/long. Long and lat change, but the user cannot input their own lat and long yet to change map. Added another function in LocationView, fromLocToAddress(), which uses reverseGecoding to find name of location.
 
+I can currently change coordinates and name according to map position, but not according to user input.
+In checkLocation() from LocationView, we make sure that mLongStr/mLatStr is equal to mLat/mLong. 
+In LocationViewModel,
 
 

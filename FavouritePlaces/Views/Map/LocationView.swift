@@ -16,6 +16,7 @@ struct LocationView: View {
     @State var mZoom = 10.0
     @State var mLatitude: String = "0.0"
     @State var mLongitude: String = "0.0"
+    //@State var mName: String
     @State var isEditing = false
     // to change default back button
     @Environment(\.presentationMode) var presentationMode
@@ -40,9 +41,13 @@ struct LocationView: View {
                     // uses places current longitude to center map
                     Text("Longitude: \(modelMap.region.center.longitude)")
                         .font(.subheadline)
+                    Button("Update"){
+                        checkMap()
+                    }
                     
-                    Text("\(mLatitude)")
-                    Text("\(mLongitude)")
+                    TextField("Lat: ", text: $mLatitude)
+                    TextField("Long: ", text: $mLongitude)
+
                 }
             // when editing
             } else {
@@ -51,7 +56,7 @@ struct LocationView: View {
                     Image(systemName: "sparkle.magnifyingglass")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            //checkAddress()
+                          //checkAddress
                         }
                 }
                 
@@ -67,13 +72,14 @@ struct LocationView: View {
                     Image(systemName: "sparkle.magnifyingglass")
                         .foregroundColor(.blue)
                         .onTapGesture {
-                            checkMap()
+                            //checkMap()
+                            checkLocation()
                         }
                     
                 }
             }
 
-        }.navigationTitle(isEditing ? "Update place" : "Map of Place")
+        }.navigationTitle(isEditing ? "Update place" : "Map of \(modelMap.name)")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action : {
                 presentationMode.wrappedValue.dismiss()
@@ -83,10 +89,10 @@ struct LocationView: View {
                Text("Place")
             }, trailing: Button(action: {
                 if isEditing {
-                    place.strLong = mLongitude
-                    place.strLat = mLatitude
+//                    place.strLong = mLongitude
+//                    place.strLat = mLatitude
                     // then after checking, saves
-                    saveData()
+//                    saveData()
                 }
                 isEditing.toggle()
             }) {
@@ -106,7 +112,10 @@ struct LocationView: View {
     }
     
     func checkLocation() {
-        
+        modelMap.mlongStr = mLongitude
+        modelMap.mlatStr = mLatitude
+        modelMap.fromLocToAddress()
+        modelMap.setupRegion()
     }
     
     func checkZoom() {

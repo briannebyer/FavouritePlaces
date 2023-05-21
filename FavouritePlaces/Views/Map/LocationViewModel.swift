@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import CoreLocation
 import MapKit
+import SwiftUI
 
 
 // for map
@@ -32,6 +33,15 @@ extension MapLocation {
     func updateFromRegion() {
         latitude = region.center.latitude
         longitude = region.center.longitude
+    }
+    
+    func setupRegion() {
+        withAnimation{
+            region.center.latitude = latitude
+            region.center.longitude = longitude
+            region.span.longitudeDelta = delta
+            region.span.latitudeDelta = delta
+        }
     }
     
     func fromLocToAddress() {

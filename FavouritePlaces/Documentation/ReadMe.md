@@ -131,6 +131,10 @@ Simplified UI of LocationView.
 Using saveData() throughout LocationView to have persistency in app.
 
 Attempting to bind DetailView and LocationView, so that initial long and lat show on map for each place. Unable to do so.
-## Thank you for the extension! 21st of May, 2023, 11:59pm
+### Thank you for the extension! 21st of May, 2023, 11:59pm
 
+## Milestone 3
+### 27/05/23
+Added app icon.
 
+### Thank you for the extension! 31st of May, 2023, 11:59pm

@@ -101,6 +101,48 @@ extension Place {
     }
 }
 
+// extension for MapLocation, to handle timezones
+extension MapLocation {
+    var timeZoneStr: String {
+        if let tz = timeZone {
+            return tz
+        }
+        //fetchTimeZone()
+        return ""
+    }
+    
+    var timeZoneDisplay: some View{
+        HStack {
+            Image(systemName: "timer.square")
+            Text("Time zone: ")
+            if timeZoneStr != "" {
+                Text(timeZoneStr)
+            } else {
+                ProgressView()
+            }
+        }
+    }
+    // pull data from API
+//    func fetchTimeZone () {
+//        // Brisbane lat and long
+//        let urlStr = "https://timeapi.io/api/TimeZone/coordinate?latitude=27.4705&longitude=153.0260"
+//        guard let url = URL(string: urlStr) else {
+//            return
+//        }
+//        let request = URLRequest(url: url)
+//        URLSession/shared.dataTask(with: request) { data, _, _ in
+//            guard let data = data, let api = try?
+//                    JSONDecoder().decode(LocationTimeZone.self, from: data) else {
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                self.timeZone = api.timezone
+//                //self.fecthSunriseInfo()
+//            }
+//        }
+//    }
+}
+
 /**
 The function saves changes made to the managed object context of the PersistenceController shared instance.
 
@@ -122,7 +164,7 @@ func loadDefaultPlaces() {
             // next default place
             ["GongCha", "Best boba", "37.8238", "144.9625", "https://gongchatea.com.au/wp-content/uploads/2021/04/IMG_4040-300x225.jpg"],
             // next default place
-            ["Eaton Centre", "Iconic mall", "43.6544", "79.3807", "https://upload.wikimedia.org/wikipedia/commons/7/77/Flight_Stop%2C_Eaton_Centre%2C_Toronto_%2830397664842%29.jpg"]]
+            ["Eaton Centre", "Iconic mall", "43.6544", "79.3807", "https://upload.wikimedia.org/wikipedia/commons/b/b2/CF_Tornoto_Eaton_Centre_202205.jpg"]]
     
     let ctx = PersistenceController.shared.container.viewContext
 

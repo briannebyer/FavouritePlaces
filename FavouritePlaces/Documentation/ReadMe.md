@@ -137,4 +137,7 @@ Attempting to bind DetailView and LocationView, so that initial long and lat sho
 ### 27/05/23
 Added app icon.
 
+Each place still has the same LocationView (map). To fix this issue, I used .task to checkMap() everytime the view (LocationView) appears. I then used .onAppear, which is also executed when LocationView appears, that sets up initial values of mLat and mLong, based on the values of the place object. It also called checkLocation() and checkMap(). Using .onDisappear, it ensures that every time the LocationView disappears, anything executed while the LocationView appears, is saved. 
+
+
 ### Thank you for the extension! 31st of May, 2023, 11:59pm

@@ -23,6 +23,7 @@ struct LocationView: View {
     
     var body: some View {
         VStack (alignment: .center){
+            // not editing
             if !isEditing {
                 ZStack {
                     Map(coordinateRegion: $modelMap.region)
@@ -73,7 +74,18 @@ struct LocationView: View {
                 }
             }
 
-        }.navigationTitle(isEditing ? "Update place" : "Map of \(place.strName)")
+        }.task {
+            checkMap()
+        }
+        .onAppear(){
+            mLatitude = place.strLat
+            mLongitude = place.strLong
+            checkLocation()
+            checkMap()
+        }.onDisappear(){
+            saveData()
+        }
+        .navigationTitle(isEditing ? "Update place" : "Map of \(place.strName)")
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: Button(action : {
                 presentationMode.wrappedValue.dismiss()
@@ -95,6 +107,7 @@ struct LocationView: View {
         DispatchQueue.main.async {
             modelMap.fromAddressToLoc(updateViewLoc)
             // save
+            saveData()
             }
         }
     
@@ -104,6 +117,7 @@ struct LocationView: View {
         modelMap.mlongStr = mLongitude
         modelMap.mlatStr = mLatitude
         //save
+        saveData()
     }
     
     func checkLocation() {

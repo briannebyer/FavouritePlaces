@@ -162,9 +162,9 @@ func saveData() {
 func loadDefaultPlaces() {
       let defaultPlaces = [["Mt Tamborine", "Beautiful views!", "-27.942164", "153.193649", "https://www.mustdogoldcoast.com/sites/mustdogoldcoast/files/styles/mdb_category_blue_node_large/public/featured/Hero%20st-bernards2017-09-19-00.51.21_0%20%281%29.jpg?itok=eNYlsor2"],
             // next default place
-            ["GongCha", "Best boba", "37.8238", "144.9625", "https://gongchatea.com.au/wp-content/uploads/2021/04/IMG_4040-300x225.jpg"],
+            ["GongCha", "Best boba", "-37.8238", "144.9625", "https://gongchatea.com.au/wp-content/uploads/2021/04/IMG_4040-300x225.jpg"],
             // next default place
-            ["Eaton Centre", "Iconic mall", "43.6544", "79.3807", "https://upload.wikimedia.org/wikipedia/commons/b/b2/CF_Tornoto_Eaton_Centre_202205.jpg"]]
+            ["CF Eaton Center", "Iconic mall", "43.6544", "-79.3807", "https://upload.wikimedia.org/wikipedia/commons/b/b2/CF_Tornoto_Eaton_Centre_202205.jpg"]]
     
     let ctx = PersistenceController.shared.container.viewContext
 

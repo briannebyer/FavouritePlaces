@@ -139,5 +139,7 @@ Added app icon.
 
 Each place still has the same LocationView (map). To fix this issue, I used .task to checkMap() everytime the view (LocationView) appears. I then used .onAppear, which is also executed when LocationView appears, that sets up initial values of mLat and mLong, based on the values of the place object. It also called checkLocation() and checkMap(). Using .onDisappear, it ensures that every time the LocationView disappears, anything executed while the LocationView appears, is saved. 
 
+Another issue is the zoom in LocationView. It is important that the zoom is persistent. 
+In Entity Place, added attribute placeZoom, so that zoom can be updated and used across the app using CoreData. Made sure that when in Editmode of LocationView, when user has access to the zoom slider, if zoom slider is changed (mZoom), placeZoom is equal to mZoom. Added mZoom to onAppear, so that is changed when LocationView appears, and any changes are saved when LocationView disappears.
 
 ### Thank you for the extension! 31st of May, 2023, 11:59pm

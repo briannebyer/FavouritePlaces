@@ -13,7 +13,7 @@ struct LocationView: View {
     var place: Place
     // for map, using new class
     @ObservedObject var modelMap: MapLocation
-    @State var mZoom = 10.0
+    @State var mZoom = 45.0
     @Binding var mLatitude: String
     @Binding var mLongitude: String
     //@State var mName: String
@@ -57,6 +57,7 @@ struct LocationView: View {
                 
                 Slider(value: $mZoom, in: 10...60) {
                     if !$0 {
+                        place.placeZoom = mZoom
                         checkZoom()
                         saveData()
                     }
@@ -78,10 +79,20 @@ struct LocationView: View {
             checkMap()
         }
         .onAppear(){
+            
+            if(place.placeZoom<10.0){
+                place.placeZoom = 10
+            }
+            print(place.placeZoom)
+            
+            mZoom = place.placeZoom
+            print(mZoom)
             mLatitude = place.strLat
             mLongitude = place.strLong
             checkLocation()
+            checkZoom()
             checkMap()
+            
         }.onDisappear(){
             saveData()
         }

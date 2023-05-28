@@ -31,7 +31,7 @@ struct ContentView: View {
                 }
             List {
                 ForEach(places) { place in
-                    NavigationLink(destination: DetailView(place: place, modelMap: modelMap)) {
+                    NavigationLink(destination: DetailView(place: place, modelMap: modelMap)){
                         RowView(place: place)
                     }
                     

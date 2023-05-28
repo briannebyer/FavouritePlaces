@@ -131,7 +131,7 @@ extension Place {
 
     var timeZoneDisplay: some View{
         HStack {
-            Image(systemName: "timer.square")
+            Image(systemName: "timer")
             Text("Time zone: ")
             if strTimeZone != "" {
                 Text(strTimeZone)
@@ -144,7 +144,8 @@ extension Place {
     var strSunrise: String {
         if let sr = placeSunrise {
             let localTM = timeConvertFromGMTtoTimeZone(from: sr, to: self.strTimeZone)
-            return "GMT: \(sr) Local:\(localTM)"
+            // return "GMT: \(sr) Local:\(localTM)"
+            return "\(localTM)"
         }
         return ""
     }
@@ -152,7 +153,8 @@ extension Place {
     var strSunset: String {
         if let ss = placeSunset {
             let localTM = timeConvertFromGMTtoTimeZone(from: ss, to: self.strTimeZone)
-            return "GMT: \(ss) Local:\(localTM)"
+            // return "GMT: \(ss) Local:\(localTM)"
+            return "\(localTM)"
         }
         return ""
     }
@@ -160,9 +162,11 @@ extension Place {
     var sunRiseDisplay: some View{
         HStack {
             Image(systemName: "sunrise")
-            Text("Sunrise: ")
+                .foregroundColor(.gray)
+            //Text("Sunrise: ")
             if strSunrise != "" {
                 Text(strSunrise)
+                    .font(.caption)
             } else {
                 ProgressView()
             }
@@ -172,9 +176,11 @@ extension Place {
     var sunSetDisplay: some View{
         HStack {
             Image(systemName: "sunset")
-            Text("Sunset: ")
+                .foregroundColor(.gray)
+            //Text("Sunset: ")
             if strSunset != "" {
                 Text(strSunset)
+                    .font(.caption)
             } else {
                 ProgressView()
             }

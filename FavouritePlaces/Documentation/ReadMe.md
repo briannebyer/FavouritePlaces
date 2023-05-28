@@ -155,4 +155,6 @@ Need to ensure that each place has own timezone. In ViewModel, changed feault Br
 Now that we have the timezone of each place, the sunset and sunrise can be found. Need to use another API - https://sunrise-sunset.org/api. In ViewModel, added structs and fetch function similar to time zone. 
 Also created a similar display for sunset and sunrise times, to refer to in DetailView. Requires a function to convert GMT to TimeZone, refer to comments and documentation for more info.
 
+Formatting DetailView and the displays of sunrise, sunset and timezone (in ViewModel) for better UI. Formatted LocationView as well.
+
 ### Thank you for the extension! 31st of May, 2023, 11:59pm

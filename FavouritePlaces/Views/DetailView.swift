@@ -37,35 +37,43 @@ struct DetailView: View {
     
     var body: some View {
         VStack {
+            // when not editing
             if !isEditing {
-                List {
-                    VStack (alignment: .leading) {
-                        HStack {
-                            Text("Place name: ")
-                                .foregroundColor(.gray)
+                VStack {
+                    List {
+                        VStack (alignment: .leading) {
+                            HStack {
+                                Text("Place name: ")
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                Text("\(locationName)")
+                            }
+                            image.scaledToFit().cornerRadius(20).shadow(radius:10)
+                            HStack {
+                                Text("\(locationDetail)")
+                                    .font(.caption)
+                            }
                             Spacer()
-                            Text("\(locationName)")
-                        }
-                        image.scaledToFit().cornerRadius(20).shadow(radius:10)
-                        HStack {
-                            Text("\(locationDetail)")
-                                .font(.caption)
-                        }
-                        Spacer()
-                        NavigationLink(destination: LocationView(place: place, modelMap: modelMap, mLatitude: $locationLat, mLongitude: $locationLong)){
-                            // show snippet
-                            Map(coordinateRegion: $mapSnippet)
-                                .frame(width: 50, height: 50, alignment: .leading)
-                                            Text("Map of \(locationName)")
+                            NavigationLink(destination: LocationView(place: place, modelMap: modelMap, mLatitude: $locationLat, mLongitude: $locationLong)){
+                                // show snippet
+                                Map(coordinateRegion: $mapSnippet)
+                                    .frame(width: 50, height: 50, alignment: .leading)
+                                                Text("Map of \(locationName)")
+                                            }
                                         }
-                        // show time zone
-                        place.timeZoneDisplay
-                        // show sunrise and sunset
-                        place.sunRiseDisplay
-                        place.sunSetDisplay
-                    }
+                                    }
+                    
+                                    HStack {
+                                        // show time zone
+                                        //place.timeZoneDisplay
+                                        // show sunrise and sunset
+                                        place.sunRiseDisplay
+                                        Spacer()
+                                        place.sunSetDisplay
+                                    }.padding()
 
                 }
+                // when editing
             } else {
                 List {
                     TextField("Enter place name: ", text: $locationName)

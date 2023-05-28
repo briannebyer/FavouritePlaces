@@ -29,20 +29,27 @@ struct LocationView: View {
                     Map(coordinateRegion: $modelMap.region)
                 }
                 VStack {
-                    // uses place's current latitude to center map
-                    Text("Latitude: \(modelMap.region.center.latitude)")
-                        .font(.subheadline)
-                    // uses places current longitude to center map
-                    Text("Longitude: \(modelMap.region.center.longitude)")
-                        .font(.subheadline)
-                    Button("Update Coordinates"){
-                        checkMap()
-                        // update
-                        place.strLat = mLatitude
-                        place.strLong = mLongitude
-                        // save
-                        saveData()
-                }
+                    HStack {
+                        VStack {
+                            // uses place's current latitude to center map
+                            Text("Latitude: \(modelMap.region.center.latitude)")
+                                .font(.subheadline)
+                            // uses places current longitude to center map
+                            Text("Longitude: \(modelMap.region.center.longitude)")
+                                .font(.subheadline)
+                        }
+                        Spacer()
+                        Image(systemName: "map")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                checkMap()
+                                // update
+                                place.strLat = mLatitude
+                                place.strLong = mLongitude
+                                // save
+                                saveData()
+                            }
+                    }
                 }
             // when editing
             } else {

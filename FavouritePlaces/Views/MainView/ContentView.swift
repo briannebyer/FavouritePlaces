@@ -33,6 +33,11 @@ struct ContentView: View {
                 ForEach(places) { place in
                     NavigationLink(destination: DetailView(place: place, modelMap: modelMap)){
                         RowView(place: place)
+                        HStack {
+                            Text(place.strName + ": " + place.strDesc)
+//                          Text(place.strDesc)
+                        }.lineLimit(2)
+
                     }
                     
                 }.onDelete(perform: delPlace)

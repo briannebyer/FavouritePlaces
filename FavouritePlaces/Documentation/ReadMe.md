@@ -161,5 +161,7 @@ In FavouritePlacesTests, removed Milestone 1 testing, as it is no longer relevan
 
 Made sure any complicated code has a comment, and removed any unneccessary code.
 Created SwiftDoc, access via Product -> Build Documentation.
-  
-### Thank you for the extension! 31st of May, 2023, 11:59pm
+
+One issue was that DetailView changes are not updated in ContentView. After looking through code, remembered that I have a separate RowView that displays both image and name of place. In RowView, there is no methods to update name if changed in DetailView. An easy fix was to use RowView for the image only,and reference name in ContentView. Formatted to ensure good UI.
+
+### Video for Milestone 3:

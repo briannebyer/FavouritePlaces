@@ -16,8 +16,8 @@ struct RowView: View {
                 .frame(width:40, height: 40)
                 .clipShape(Rectangle())
                 .cornerRadius(5)
-            Text(place.rowDisplay)
-                .lineLimit(2)
+//            Text(place.rowDisplay)
+//                .lineLimit(2)
         }
         .task {
             image = await place.getImage()

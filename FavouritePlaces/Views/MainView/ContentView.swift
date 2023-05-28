@@ -69,7 +69,7 @@ struct ContentView: View {
     }
     
     /**
-    This unction deletes a place from the managed object context of the viewContext, based on the specified IndexSet of place objects.
+    This function deletes a place from the managed object context of the viewContext, based on the specified IndexSet of place objects.
 
     - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
     - Parameter viewContext: The managed object context from which the place will be deleted.

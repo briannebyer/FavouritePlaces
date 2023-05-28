@@ -13,6 +13,11 @@ import SwiftUI
 let defaultImage = Image(systemName: "photo").resizable()
 var downloadImages: [URL: Image] = [:]
 
+// store the decode api result for time zone
+struct LocationTimeZone: Decodable {
+    var timeZone: String
+}
+
 /**
 This extension adds computed properties and a function to the Place struct. The properties allow for getting and setting the name, description, longitude, latitude, and URL of a place in both string and non-string formats. The rowDisplay property returns a string combining the place name and description. The getImage() function asynchronously downloads and returns an image associated with the place URL, or a default image if the URL is nil or invalid.
 
@@ -101,46 +106,51 @@ extension Place {
     }
 }
 
-// extension for MapLocation, to handle timezones
-extension MapLocation {
-    var timeZoneStr: String {
-        if let tz = timeZone {
+// extension for Place, to handle timezones
+extension Place {
+    
+    var strTimeZone: String {
+        if let tz = self.placeTimeZone {
             return tz
         }
-        //fetchTimeZone()
+        fetchTimeZone()
         return ""
     }
-    
+
     var timeZoneDisplay: some View{
         HStack {
             Image(systemName: "timer.square")
             Text("Time zone: ")
-            if timeZoneStr != "" {
-                Text(timeZoneStr)
+            if strTimeZone != "" {
+                Text(strTimeZone)
             } else {
                 ProgressView()
             }
         }
     }
+    
     // pull data from API
-//    func fetchTimeZone () {
-//        // Brisbane lat and long
-//        let urlStr = "https://timeapi.io/api/TimeZone/coordinate?latitude=27.4705&longitude=153.0260"
-//        guard let url = URL(string: urlStr) else {
-//            return
-//        }
-//        let request = URLRequest(url: url)
-//        URLSession/shared.dataTask(with: request) { data, _, _ in
-//            guard let data = data, let api = try?
-//                    JSONDecoder().decode(LocationTimeZone.self, from: data) else {
-//                return
-//            }
-//            DispatchQueue.main.async {
-//                self.timeZone = api.timezone
-//                //self.fecthSunriseInfo()
-//            }
-//        }
-//    }
+    func fetchTimeZone () {
+        // Brisbane lat and long
+        let urlStr = "https://timeapi.io/api/TimeZone/coordinate?latitude=27.4705&longitude=153.0260"
+        guard let url = URL(string: urlStr) else {
+            return
+        }
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            guard let data = data, let api = try?
+                    JSONDecoder().decode(LocationTimeZone.self, from: data) else {
+                return
+            }
+            DispatchQueue.main.async {
+                print("THIS IS THE TIME")
+                print(api.timeZone)
+                self.placeTimeZone = api.timeZone
+                //self.fecthSunriseInfo()
+            }
+        }.resume()
+    }
 }
 
 /**

@@ -83,10 +83,10 @@ struct LocationView: View {
             if(place.placeZoom<10.0){
                 place.placeZoom = 10
             }
-            print(place.placeZoom)
+//            print(place.placeZoom)
             
             mZoom = place.placeZoom
-            print(mZoom)
+//            print(mZoom)
             mLatitude = place.strLat
             mLongitude = place.strLong
             checkLocation()

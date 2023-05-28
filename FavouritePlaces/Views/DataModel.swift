@@ -24,7 +24,8 @@ class MapLocation: ObservableObject {
     static let shared = MapLocation()
     //static let shared = MapLocation(name: name, latitude: latitude, longitude: longitude)
     
-    //init(){}//name: String, latitude: Double, longitude: Double) {
+    init(){}
+    //name: String, latitude: Double, longitude: Double) {
         //self.name = name
         //self.latitude = latitude
         //self.longitude = longitude

@@ -7,9 +7,12 @@
         <attribute name="placeName" optional="YES" attributeType="String"/>
         <attribute name="placePicture" optional="YES" attributeType="URI"/>
         <attribute name="placePosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="placeSunrise" optional="YES" attributeType="String"/>
+        <attribute name="placeSunset" optional="YES" attributeType="String"/>
+        <attribute name="placeTimeZone" optional="YES" attributeType="String"/>
         <attribute name="placeZoom" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="Place" positionX="-54" positionY="-9" width="128" height="134"/>
+        <element name="Place" positionX="-54" positionY="-9" width="128" height="179"/>
     </elements>
 </model>

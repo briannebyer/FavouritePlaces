@@ -30,8 +30,8 @@ struct DetailView: View {
     var zoom = 100.0
     // for timezone, sunset and sunrise
     @State var locationTZ = ""
-    // @State var strSunrise = ""
-    // @State var strSunset = ""
+    @State var locationSunrise = ""
+    @State var locationSunset = ""
     
     @State private var mapSnippet = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0.0, longitude: 0.0), span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
     
@@ -60,6 +60,9 @@ struct DetailView: View {
                                         }
                         // show time zone
                         place.timeZoneDisplay
+                        // show sunrise and sunset
+                        place.sunRiseDisplay
+                        place.sunSetDisplay
                     }
 
                 }
@@ -121,8 +124,16 @@ struct DetailView: View {
                 
                 // fetch timezone
                 place.fetchTimeZone()
+                place.fetchSunInfo()
                 // time zone
                 locationTZ = place.strTimeZone
+                locationSunrise = place.strSunrise
+                locationSunset = place.strSunset
+                // show sunrise and sunset
+//                place.sunRiseDisplay
+//                place.sunSetDisplay
+//                @State var locationSunrise = ""
+//                @State var locationSunset = ""
             
             }.onDisappear(){
                 place.strName = locationName
@@ -132,6 +143,8 @@ struct DetailView: View {
                 place.strLat = locationLat
                 // time zone
                 //place.strTimeZone = locationTZ
+                //place.strSunrise = locationSunrise
+                //place.strSunset = locationSunset
                 saveData()
             }
             

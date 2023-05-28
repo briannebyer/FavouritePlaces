@@ -143,7 +143,7 @@ Another issue is the zoom in LocationView. It is important that the zoom is pers
 In Entity Place, added attribute placeZoom, so that zoom can be updated and used across the app using CoreData. Made sure that when in Editmode of LocationView, when user has access to the zoom slider, if zoom slider is changed (mZoom), placeZoom is equal to mZoom. Added mZoom to onAppear, so that is changed when LocationView appears, and any changes are saved when LocationView disappears.
 
 28/05/23
-The major requirement in Milestone 3 is for each place to have their own sunset and sunrise times (shown in DetailView). To do so, first need to recognize each places timezone, and will use Swaggers Time API.
+The major requirement in Milestone 3 is for each place to have their own sunset and sunrise times (shown in DetailView). To do so, first need to recognize each places timezone, and will use Swaggers Time API - https://timeapi.io/swagger/index.html.
 In DataModel, added var timeZone to class MapLocation, to handle timezone of each place.
 In ViewModel, added extension of Place (CoreData), to handle the timeZone var to be a string or another data type and handle the display view.
 Now need to fetch the timezone using the chosen API, created a func and struct for timezone, the struct stores the decode values. 
@@ -151,6 +151,8 @@ Errors occured, need to add attributes placeTimeZone, placeSunset and placeSunri
 Referred to strTimeZone (locationTZ) in DetailView and used timeZoneDisplay to test that API is working. It should show Brisbane timezone.
 Used .onAppear to update locationTZ to equal strTimeZone. Each place currently shows the Brisbane timezone.
 
-
+Need to ensure that each place has own timezone. In ViewModel, changed feault Brisbane lat and long to each places own lat and long. Each place now has appropriate timezone.
+Now that we have the timezone of each place, the sunset and sunrise can be found. Need to use another API - https://sunrise-sunset.org/api. In ViewModel, added structs and fetch function similar to time zone. 
+Also created a similar display for sunset and sunrise times, to refer to in DetailView. Requires a function to convert GMT to TimeZone, refer to comments and documentation for more info.
 
 ### Thank you for the extension! 31st of May, 2023, 11:59pm

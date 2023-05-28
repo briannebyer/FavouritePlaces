@@ -18,6 +18,18 @@ struct LocationTimeZone: Decodable {
     var timeZone: String
 }
 
+// store the decode api result for time
+struct LocationSunriseSunset: Decodable {
+    var sunrise: String
+    var sunset: String
+}
+
+// to be able to access results, as information is nested
+struct LocationSunriseSunsetAPI: Decodable {
+    var results: LocationSunriseSunset
+    var status: String?
+}
+
 /**
 This extension adds computed properties and a function to the Place struct. The properties allow for getting and setting the name, description, longitude, latitude, and URL of a place in both string and non-string formats. The rowDisplay property returns a string combining the place name and description. The getImage() function asynchronously downloads and returns an image associated with the place URL, or a default image if the URL is nil or invalid.
 
@@ -129,10 +141,49 @@ extension Place {
         }
     }
     
+    var strSunrise: String {
+        if let sr = placeSunrise {
+            let localTM = timeConvertFromGMTtoTimeZone(from: sr, to: self.strTimeZone)
+            return "GMT: \(sr) Local:\(localTM)"
+        }
+        return ""
+    }
+    
+    var strSunset: String {
+        if let ss = placeSunset {
+            let localTM = timeConvertFromGMTtoTimeZone(from: ss, to: self.strTimeZone)
+            return "GMT: \(ss) Local:\(localTM)"
+        }
+        return ""
+    }
+    
+    var sunRiseDisplay: some View{
+        HStack {
+            Image(systemName: "sunrise")
+            Text("Sunrise: ")
+            if strSunrise != "" {
+                Text(strSunrise)
+            } else {
+                ProgressView()
+            }
+        }
+    }
+    
+    var sunSetDisplay: some View{
+        HStack {
+            Image(systemName: "sunset")
+            Text("Sunset: ")
+            if strSunset != "" {
+                Text(strSunset)
+            } else {
+                ProgressView()
+            }
+        }
+    }
+    
     // pull data from API
     func fetchTimeZone () {
-        // Brisbane lat and long
-        let urlStr = "https://timeapi.io/api/TimeZone/coordinate?latitude=27.4705&longitude=153.0260"
+        let urlStr = "https://timeapi.io/api/TimeZone/coordinate?latitude=\(placeLatitude)&longitude=\(placeLongitude)"
         guard let url = URL(string: urlStr) else {
             return
         }
@@ -144,10 +195,32 @@ extension Place {
                 return
             }
             DispatchQueue.main.async {
-                print("THIS IS THE TIME")
-                print(api.timeZone)
+                //print("THIS IS THE TIME")
+                //print(api.timeZone)
                 self.placeTimeZone = api.timeZone
-                //self.fecthSunriseInfo()
+                self.fetchSunInfo()
+            }
+        }.resume()
+    }
+    
+    // pull data from sunrise and sunset API
+    func fetchSunInfo () {
+        let urlStr = "https://api.sunrise-sunset.org/json?lat=\(placeLatitude)&lng=\(placeLongitude)"
+        guard let url = URL(string: urlStr) else {
+            return
+        }
+        let request = URLRequest(url: url)
+        
+        URLSession.shared.dataTask(with: request) { data, _, _ in
+            guard let data = data, let api = try?
+                    JSONDecoder().decode(LocationSunriseSunsetAPI.self, from: data) else {
+                return
+            }
+            DispatchQueue.main.async {
+//                print("Sunrise Time")
+//                print(api.results.sunrise)
+                self.placeSunrise = api.results.sunrise
+                self.placeSunset = api.results.sunset
             }
         }.resume()
     }
@@ -187,4 +260,22 @@ func loadDefaultPlaces() {
         place.strURL = $0[4]
     }
     saveData()
+}
+
+// func to concert time from GMT to time zone
+func timeConvertFromGMTtoTimeZone(from tm: String, to timezone: String) -> String {
+    let inputFormatter = DateFormatter()
+    inputFormatter.dateStyle = .none
+    inputFormatter.timeStyle = .medium
+    inputFormatter.timeZone = .init(secondsFromGMT: 0)
+    
+    let outPutFormatter = DateFormatter()
+    outPutFormatter.dateStyle = .none
+    outPutFormatter.timeStyle = .medium
+    outPutFormatter.timeZone = TimeZone(identifier: timezone)
+    
+    if let time = inputFormatter.date(from: tm) {
+        return outPutFormatter.string(from: time)
+    }
+    return "<unknown>"
 }

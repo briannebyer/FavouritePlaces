@@ -13,18 +13,29 @@ import SwiftUI
 let defaultImage = Image(systemName: "photo").resizable()
 var downloadImages: [URL: Image] = [:]
 
-// store the decode api result for time zone
+/**
+ The LocationTimeZone struct represents the decoded result from an API response for retrieving the time zone of a location. It conforms to the Decodable protocol, indicating that it can be initialized from an external representation, JSON.
+ - Parameter timeZone: property value obtained from decoding the corresponding JSON key in the API response.
+ */
 struct LocationTimeZone: Decodable {
     var timeZone: String
 }
 
-// store the decode api result for time
+/**
+ The LocationSunriseSunset struct represents the decoded result from an API response for retrieving the sunrise and sunset times of a location. It conforms to the Decodable protocol, indicating that it can be initialized from an external representation, JSON.
+ - Parameter sunrise: string representing the time of sunrise for the location.
+ - Parameter sunset: string representing the time of sunset for the location.
+ */
 struct LocationSunriseSunset: Decodable {
     var sunrise: String
     var sunset: String
 }
 
-// to be able to access results, as information is nested
+/**
+ The LocationSunriseSunsetAPI struct represents the decoded result from an API response for retrieving the sunrise and sunset times of a location. It provides access to the nested LocationSunriseSunset object and the status. It conforms to the Decodable protocol, indicating that it can be initialized from an external representation, JSON.
+ - Parameter results: LocationSunriseSunset object representing the sunrise and sunset times.
+ - Parameter status: string representing the status of the API response.
+ */
 struct LocationSunriseSunsetAPI: Decodable {
     var results: LocationSunriseSunset
     var status: String?
@@ -33,14 +44,14 @@ struct LocationSunriseSunsetAPI: Decodable {
 /**
 This extension adds computed properties and a function to the Place struct. The properties allow for getting and setting the name, description, longitude, latitude, and URL of a place in both string and non-string formats. The rowDisplay property returns a string combining the place name and description. The getImage() function asynchronously downloads and returns an image associated with the place URL, or a default image if the URL is nil or invalid.
 
-- Parameter strName: a computed property that returns the name of the place as a string or "unknown" if it is nil.
-- Parameter strDesc: a computed property that returns the description of the place as a string or "unknown" if it is nil.
-- Parameter strLong: a computed property that returns the longitude of the place as a string or "unknown" if it is nil. It can also be set with a string value and automatically converts it to a Double data type.
-- Parameter strLat: a computed property that returns the latitude of the place as a string or "unknown" if it is nil. It can also be set with a string value and automatically converts it to a Double data type.
-- Parameter strURL: a computed property that returns the URL of the place's picture as a string or an empty string if it is nil. It can also be set with a string value and automatically converts it to a URL data type.
-- Parameter rowDisplay: a computed property that returns the name and description of the place in the format "name: description".
-- Requires: The place struct must have a placeName and placeDetail property, and the placeLongitude and placeLatitude properties must be convertible to Double.
-- Returns: An Image object downloaded asynchronously from the place URL or a default image if the URL is nil or invalid.
+- Parameter strName: computed property that returns the name of the place as a string or "unknown" if it is nil.
+- Parameter strDesc: computed property that returns the description of the place as a string or "unknown" if it is nil.
+- Parameter strLong: computed property that returns the longitude of the place as a string or "unknown" if it is nil. It can also be set with a string value and automatically converts it to a Double data type.
+- Parameter strLat: computed property that returns the latitude of the place as a string or "unknown" if it is nil. It can also be set with a string value and automatically converts it to a Double data type.
+- Parameter strURL: computed property that returns the URL of the place's picture as a string or an empty string if it is nil. It can also be set with a string value and automatically converts it to a URL data type.
+- Parameter rowDisplay: computed property that returns the name and description of the place in the format "name: description".
+- Requires: Place struct must have a placeName and placeDetail property, and the placeLongitude and placeLatitude properties must be convertible to Double.
+- Returns: Image object downloaded asynchronously from the place URL or a default image if the URL is nil or invalid.
 */
 extension Place {
     var strName: String {
@@ -118,7 +129,19 @@ extension Place {
     }
 }
 
-// extension for Place, to handle timezones
+
+/**
+This extension adds computed properties and functions to the Place struct for handling time zones and retrieving sunrise and sunset times.
+
+- Parameter strTimeZone: computed property that returns the time zone of the place as a string. If the time zone is not available, it initiates a function to fetch the time zone and returns an empty string.
+- Parameter timeZoneDisplay: view that displays the time zone information.
+- Parameter strSunrise: computed property that returns the time of sunrise for the place as a string, converted to the local time zone. If the sunrise time is not available, it returns an empty string.
+- Parameter strSunset: computed property that returns the time of sunset for the place as a string, converted to the local time zone. If the sunset time is not available, it returns an empty string.
+- Parameter sunRiseDisplay: view that displays the sunrise time.
+- Parameter sunSetDisplay: view that displays the sunset time.
+- Parameter fetchTimeZone: function that fetches the time zone of the place from an API and updates the placeTimeZone property.
+- Parameter fetchSunInfo: function that fetches the sunrise and sunset times for the place from an API and updates the placeSunrise and placeSunset properties.
+*/
 extension Place {
     
     var strTimeZone: String {
@@ -235,8 +258,8 @@ extension Place {
 /**
 The function saves changes made to the managed object context of the PersistenceController shared instance.
 
-- Important: The changes will not be persisted to the persistent store until the context is saved.
-- Throws: An error if there is an issue saving the changes.
+- Important: changes will not be persisted to the persistent store until the context is saved.
+- Throws: error if there is an issue saving the changes.
 */
 func saveData() {
     let ctx = PersistenceController.shared.container.viewContext
@@ -247,7 +270,9 @@ func saveData() {
     }
 }
 
-// create function to load default places
+/**
+ The function loads default places into the app.
+ */
 func loadDefaultPlaces() {
       let defaultPlaces = [["Mt Tamborine", "Beautiful views!", "-27.942164", "153.193649", "https://www.mustdogoldcoast.com/sites/mustdogoldcoast/files/styles/mdb_category_blue_node_large/public/featured/Hero%20st-bernards2017-09-19-00.51.21_0%20%281%29.jpg?itok=eNYlsor2"],
             // next default place
@@ -268,7 +293,13 @@ func loadDefaultPlaces() {
     saveData()
 }
 
-// func to concert time from GMT to time zone
+/**
+ This function converts a time from GMT to a specific time zone.
+
+ - Parameter from: time to convert in GMT format (e.g., "10:30:00").
+ - Parameter to: target time zone identifier (e.g., "America/New_York").
+ - Returns: converted time as a string in the format specified by the target time zone, or "<unknown>" if the conversion fails.
+ */
 func timeConvertFromGMTtoTimeZone(from tm: String, to timezone: String) -> String {
     let inputFormatter = DateFormatter()
     inputFormatter.dateStyle = .none

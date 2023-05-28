@@ -11,7 +11,17 @@ import CoreLocation
 import MapKit
 import SwiftUI
 
-// for map
+/**
+ This extension adds computed properties and a function to the MapLocation struct. The properties allow for getting and setting the latitude and longitude of a map location as strings for converting them to Double values. The updateFromRegion function updates the map location's latitude and longitude based on the current region. The setupRegion function sets up the region of the map location based on its latitude, longitude, and delta. The fromLocToAddress function converts the map location's latitude and longitude to an address and updates the name property with the address information. The fromAddressToLoc function converts the map location's name to a latitude and longitude coordinate. The fromZoomToDelta function converts a zoom level to a delta value for the region span.
+
+ - Parameter mlatStr: Computed property that returns the latitude of the map location as a string with a maximum of 5 decimal places. It can also be set with a string value and automatically converts it to a Double data type.
+ - Parameter mlongStr: Computed property that returns the longitude of the map location as a string with a maximum of 5 decimal places. It can also be set with a string value and automatically converts it to a Double data type.
+ - Parameter updateFromRegion: Function that updates the map location's latitude and longitude based on the current region.
+ - Parameter setupRegion: Function that sets up the region of the map location based on its latitude, longitude, and delta.
+ - Parameter fromLocToAddress: Function that converts the map location's latitude and longitude to an address and updates the name property with the address information.
+ - Parameter fromAddressToLoc: Function that converts the map location's name to a latitude and longitude coordinate.
+ - Parameter fromZoomToDelta: Function that converts a zoom level to a delta value for the region span.
+ */
 extension MapLocation {
     var mlatStr: String {
         get{String(format: "%.5f", latitude)}
@@ -74,7 +84,6 @@ extension MapLocation {
         }
     }
     
-// might need to play around with d values
     func fromZoomToDelta(_ zoom: Double){
         let d1 = -10.0
         let d2 = 3.0

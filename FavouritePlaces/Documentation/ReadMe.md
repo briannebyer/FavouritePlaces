@@ -159,5 +159,7 @@ Formatting DetailView and the displays of sunrise, sunset and timezone (in ViewM
 
 In FavouritePlacesTests, removed Milestone 1 testing, as it is no longer relevant. Added two functions, one that checks that the map updates and is set up appropriately. The other checks the format of mLat, mLong are both String values, with 5 decimal places, as dictated in MapLocation.
 
+Made sure any complicated code has a comment, and removed any unneccessary code.
+Created SwiftDoc, access via Product -> Build Documentation.
   
 ### Thank you for the extension! 31st of May, 2023, 11:59pm

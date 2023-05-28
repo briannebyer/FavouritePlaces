@@ -55,10 +55,10 @@ struct ContentView: View {
     /**
     This function adds a new place to the managed object context of the viewContext using the specified name and details.
 
-    - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
-    - Parameter viewContext: The managed object context to which the new place will be added.
-    - Parameter placeName: The name of the new place to be added.
-    - Parameter placeDetail: The details of the new place to be added.
+    - Important: function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
+    - Parameter viewContext: managed object context to which the new place will be added.
+    - Parameter placeName: name of the new place to be added.
+    - Parameter placeDetail: details of the new place to be added.
     */
     func addPlace() {
         withAnimation {
@@ -71,9 +71,9 @@ struct ContentView: View {
     /**
     This function deletes a place from the managed object context of the viewContext, based on the specified IndexSet of place objects.
 
-    - Important: This function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
-    - Parameter viewContext: The managed object context from which the place will be deleted.
-    - Parameter idx: An IndexSet object containing the indices of the place objects to be deleted.
+    - Important: function modifies the managed object context and must be called within a withAnimation block to ensure any UI updates are animated.
+    - Parameter viewContext: managed object context from which the place will be deleted.
+    - Parameter idx: IndexSet object containing the indices of the place objects to be deleted.
     */
     func delPlace(idx: IndexSet) {
         withAnimation {
@@ -87,8 +87,8 @@ struct ContentView: View {
     /**
     This function saves any changes made to the viewContext.
 
-    - Throws: A fatal error if there is an error while saving the context.
-    - Important: This function should be called after any changes are made to the managed object context.
+    - Throws: fatal error if there is an error while saving the context.
+    - Important: function should be called after any changes are made to the managed object context.
     */
     func saveContext() {
         do {

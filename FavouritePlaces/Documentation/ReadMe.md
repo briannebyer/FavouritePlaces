@@ -157,4 +157,7 @@ Also created a similar display for sunset and sunrise times, to refer to in Deta
 
 Formatting DetailView and the displays of sunrise, sunset and timezone (in ViewModel) for better UI. Formatted LocationView as well.
 
+In FavouritePlacesTests, removed Milestone 1 testing, as it is no longer relevant. Added two functions, one that checks that the map updates and is set up appropriately. The other checks the format of mLat, mLong are both String values, with 5 decimal places, as dictated in MapLocation.
+
+  
 ### Thank you for the extension! 31st of May, 2023, 11:59pm

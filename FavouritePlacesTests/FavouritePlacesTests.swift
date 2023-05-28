@@ -6,38 +6,54 @@
 //
 
 import XCTest
+import MapKit
+
 @testable import FavouritePlaces
 
-class FavouritePlacesTests: XCTestCase {
+class FavouritePlacesTest: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    override func setUp() {
+        super.setUp()
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        super.tearDown()
     }
-    
     /**
-    This test checks the navigation flow of the app. It creates instances of ContentView, SearchView, and DetailView with a newly created NSManagedObjectContext instance. Then it checks that each view's body property is not nil.
-
-    - Throws: An error if the test fails.
-    - Returns: Void.
-    */
-    func testNavigation() throws {
-        let contentView = ContentView()
-        let searchView = SearchView(locationName: "test", viewContext: contentView.viewContext)
-        let detailView = DetailView(place: Place(context: contentView.viewContext))
-
-        XCTAssertNotNil(contentView.body)
-        XCTAssertNotNil(searchView.body)
-        XCTAssertNotNil(detailView.body)
+     This function validates the behaviour of the `strLat` and `strLong` properties in the `MapLocation` class.
+     */
+    func testStrLatLong() throws {
+        let model = MapLocation.shared
+        
+        // set the latitude string value to "45" and check if it matches the expected value "45.00000"
+        model.mlatStr = "45"
+        // the format should be at least 5 decimal places
+        XCTAssert(model.mlatStr == "45.00000")
+        
+        model.mlongStr = "179"
+        XCTAssert(model.mlongStr == "179.00000")
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    /**
+     This function validates the behavior of updating and setting up the `region` property in the `MapLocation` class.
+     */
+    func testUpdateFromRegionAndSetupRegion() throws {
+        // creates instance of "MapLocation" class
+        let mapLocation = MapLocation.shared
+        let region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060),
+                                        span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        //updates the latitude and longitude based on region
+        mapLocation.region = region
+        mapLocation.updateFromRegion()
+
+        // if assertions fail, it indicates that the update process of the region property in the MapLocation class is incorrect
+        XCTAssertEqual(mapLocation.latitude, 40.7128)
+        XCTAssertEqual(mapLocation.longitude, -74.0060)
+        // sets up region
+        mapLocation.setupRegion()
+
+        // if assertions fail, it indicates that the center of the region is incorrect for said long and lat
+        XCTAssertEqual(mapLocation.region.center.latitude, 40.7128)
+        XCTAssertEqual(mapLocation.region.center.longitude, -74.0060)
     }
 }

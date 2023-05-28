@@ -32,3 +32,5 @@ class MapLocation: ObservableObject {
    // }
 }
 
+
+

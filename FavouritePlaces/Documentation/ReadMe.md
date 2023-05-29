@@ -142,7 +142,7 @@ Each place still has the same LocationView (map). To fix this issue, I used .tas
 Another issue is the zoom in LocationView. It is important that the zoom is persistent. 
 In Entity Place, added attribute placeZoom, so that zoom can be updated and used across the app using CoreData. Made sure that when in Editmode of LocationView, when user has access to the zoom slider, if zoom slider is changed (mZoom), placeZoom is equal to mZoom. Added mZoom to onAppear, so that is changed when LocationView appears, and any changes are saved when LocationView disappears.
 
-28/05/23
+### 28/05/23
 The major requirement in Milestone 3 is for each place to have their own sunset and sunrise times (shown in DetailView). To do so, first need to recognize each places timezone, and will use Swaggers Time API - https://timeapi.io/swagger/index.html.
 In DataModel, added var timeZone to class MapLocation, to handle timezone of each place.
 In ViewModel, added extension of Place (CoreData), to handle the timeZone var to be a string or another data type and handle the display view.
@@ -164,4 +164,5 @@ Created SwiftDoc, access via Product -> Build Documentation.
 
 One issue was that DetailView changes are not updated in ContentView. After looking through code, remembered that I have a separate RowView that displays both image and name of place. In RowView, there is no methods to update name if changed in DetailView. An easy fix was to use RowView for the image only,and reference name in ContentView. Formatted to ensure good UI.
 
-### Video for Milestone 3:
+Thank you for the extension! 31st of May, 11:59pm
+## Video for Milestone 3: https://youtu.be/aVw9PiIq-us
